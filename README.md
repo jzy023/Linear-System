@@ -6,6 +6,6 @@ This repo consists of source code of some basic linear system operations, for ex
 ## Linear Algebra Operations
 
 - matrix.H
-basic matrix class
+> basic matrix class
 - matrix.C
-basic matrix class method definitions
+> basic matrix class method definitions
