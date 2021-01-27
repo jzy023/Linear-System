@@ -31,7 +31,7 @@ public:
 	/* int func() const -->  cannot call any non-const member functions,
 	   nor can it change any member variables.*/
 	int getSize() const { return rnc_; }
-	int getEle(int i, int j) const { return matrix_[i][j]; }
+	type getEle(int i, int j) const { return matrix_[i][j]; }
 
 	// return daigonal elemtents
 	std::vector<type> diag();
@@ -40,11 +40,11 @@ public:
 	type trace();
 
 	// calculate determinant of M 
-	type det();
+	type det(); // mast function
 	type detCore(std::vector<std::vector<type>> M, int n);
  
 	// calculate eigenvalue of M
-	double eigen();
+	type eigen();
 
 	// calculate eigenvector of M
 	squareMatrix<type> eigenVec(); 
