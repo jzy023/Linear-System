@@ -2,20 +2,19 @@
 #define matrix_H
 
 template<class type>
-class Matrix {
+class squareMatrix {
 	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
 
 private:
-	long unsigned int rows_;
-	long unsigned int cols_;
+	long unsigned int rnc_; // rows and columns
 	std::vector<std::vector<type>> matrix_;
 
-	static void checkMat(const Matrix<type> &m);
+	static void checkMat(const squareMatrix<type> &m);
 	
 
 public:
 	// constructors
-	Matrix(long unsigned int rows, long unsigned int cols);
+	squareMatrix(long unsigned int n);
 
 	//build matrix_
 	void build(const std::vector<type> &m); // <-- need improvement on security
@@ -27,8 +26,7 @@ public:
 	// get rows, cols and particular element
 	/* int func() const -->  cannot call any non-const member functions,
 	   nor can it change any member variables.*/
-	int getNRow() const { return rows_; } 
-	int getNCol() const { return cols_; }
+	int getSize() const { return rnc_; }
 	int getEle(int i, int j) const { return matrix_[i][j]; }
 
 	// return daigonal elemtents
@@ -38,13 +36,13 @@ public:
 	type trace();
 
 	// calculate determinant of M 
-	double det();
+	type det();
  
 	// calculate eigenvalue of M
 	double eigen();
 
 	// calculate eigenvector of M
-	Matrix<type> eigenVec(); 
+	squareMatrix<type> eigenVec(); 
 
 
 };
