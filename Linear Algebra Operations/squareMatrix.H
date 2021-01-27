@@ -1,6 +1,10 @@
 #ifndef matrix_H
 #define matrix_H
 
+#include <math.h>
+#include <vector>
+#include <type_traits>
+
 template<class type>
 class squareMatrix {
 	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
@@ -37,6 +41,7 @@ public:
 
 	// calculate determinant of M 
 	type det();
+	type detCore(std::vector<std::vector<type>> M, int n);
  
 	// calculate eigenvalue of M
 	double eigen();
