@@ -14,8 +14,6 @@ class squareMatrix : public Matrix<type>
 
 private:
 	// std::vector<std::vector<type>> matrix_;
-
-	static void checkMat(const squareMatrix<type> &m);
 	
 
 public:

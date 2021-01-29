@@ -5,26 +5,9 @@ squareMatrix<type>::squareMatrix(long unsigned int n)
 :
 Matrix<type>::Matrix(n,n)
 {
-	squareMatrix::checkMat(*this);
+	Matrix<type>::checkMat(*this);
 };
 
-
-// PRIVATE METHODS
-template<class type>
-void squareMatrix<type>::checkMat(const squareMatrix<type> &m)
-{
-	if (m.matrix_.empty() || m.matrix_.front().empty())
-	{
-		throw std::domain_error("matrix has empty dimensions");
-	}
-	// for (const auto &rows : m.matrix_)
-	// {
-	// 	if (rows.size() != m.rows_)
-	// 	{
-	// 		throw std::domain_error("non square matrix");
-	// 	}
-	// }
-}
 
 // PUBLIC METHODS
 template<class type>

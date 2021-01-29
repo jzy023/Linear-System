@@ -16,6 +16,8 @@ class Matrix {
 
 		void clear();
 
+		static void checkMat(const Matrix<type> &m);
+
 	public:
 	// constructor
 	// Matrix(){};

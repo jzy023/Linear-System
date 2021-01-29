@@ -8,6 +8,7 @@ rows_(rows),
 cols_(cols),
 matrix_(std::vector<std::vector<type>>(rows,std::vector<type>(cols)))
 {
+	checkMat(*this);
 }
 
 // PRIVATE METHODS
@@ -17,6 +18,24 @@ void Matrix<type>::clear()
 	matrix_ = {};
 	rows_ = 0;
 	cols_ = 0;
+}
+
+
+// PRIVATE METHODS
+template<class type>
+void Matrix<type>::checkMat(const Matrix<type> &m)
+{
+	if (m.matrix_.empty() || m.matrix_.front().empty())
+	{
+		throw std::domain_error("matrix has empty dimensions");
+	}
+	// for (const auto &rows : m.matrix_)
+	// {
+	// 	if (rows.size() != m.rows_)
+	// 	{
+	// 		throw std::domain_error("non square matrix");
+	// 	}
+	// }
 }
 
 

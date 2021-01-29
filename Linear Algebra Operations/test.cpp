@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
 
 
 	std::cout << "M1 + M2 = \n[";
-	myMat = myMat2;
+	myMat += myMat2;
 	std::vector<std::vector<int>> A = myMat.getMat();
 	for (int i = 0; i < 4; ++i)
 	{
