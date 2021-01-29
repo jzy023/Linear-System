@@ -5,7 +5,6 @@ This repo consists of source code of some basic linear system operations, for ex
 
 ## Linear Algebra Operations
 
-- squareMatrix.H
-> basic square matrix class
-- squareMatrix.C
-> basic square matrix class method definitions
+- Matrix
+
+- squareMatrix
