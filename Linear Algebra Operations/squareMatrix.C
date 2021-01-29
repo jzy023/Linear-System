@@ -1,15 +1,15 @@
 #include "squareMatrix.H"
 
 template<class type>
-squareMatrix<type>::squareMatrix(long unsigned int n)
+squareMatrix<type>::squareMatrix(long unsigned int n) 
 :
-rnc_(n),
-matrix_(std::vector<std::vector<type>>(n,std::vector<type>(n)))
+Matrix<type>::Matrix(n,n)
 {
 	squareMatrix::checkMat(*this);
 };
 
 
+// PRIVATE METHODS
 template<class type>
 void squareMatrix<type>::checkMat(const squareMatrix<type> &m)
 {
@@ -19,23 +19,23 @@ void squareMatrix<type>::checkMat(const squareMatrix<type> &m)
 	}
 	// for (const auto &rows : m.matrix_)
 	// {
-	// 	if (rows.size() != m.rnc_)
+	// 	if (rows.size() != m.rows_)
 	// 	{
 	// 		throw std::domain_error("non square matrix");
 	// 	}
 	// }
 }
 
-
+// PUBLIC METHODS
 template<class type>
 void squareMatrix<type>::build(const std::vector<type> &m)
 {
-	for (int i = 0; i < rnc_; i++)
+	for (int i = 0; i < this->rows_; i++)
 	{
-		auto &row = matrix_[i];
-		for (int j = 0; j < rnc_; ++j)
+		auto &row = this->matrix_[i];
+		for (int j = 0; j < this->rows_; ++j)
 		{
-			row[j] = m[i*rnc_+j];
+			row[j] = m[i*this->rows_+j];
 		}
 	}
 }
@@ -44,14 +44,14 @@ void squareMatrix<type>::build(const std::vector<type> &m)
 template<class type>
 std::vector<type> squareMatrix<type>::diag()
 {
-	if (rnc_ != rnc_)
+	if (this->rows_ != this->rows_)
 	{
 		return {0};
 	}
-	std::vector<type> ans(rnc_,0);
-	for (int i = 0; i < rnc_; i++)
+	std::vector<type> ans(this->rows_,0);
+	for (int i = 0; i < this->rows_; i++)
 	{
-		ans[i] = matrix_[i][i];
+		ans[i] = this->matrix_[i][i];
 	}
 	return ans;
 }
@@ -61,8 +61,8 @@ template<class type>
 type squareMatrix<type>::trace()
 {
 	type ans = 0.0;
-	for (int i = 0; i < rnc_; i++){
-		ans += matrix_[i][i];
+	for (int i = 0; i < this->rows_; i++){
+		ans += this->matrix_[i][i];
 	}
 	return ans;
 }
@@ -112,10 +112,21 @@ type squareMatrix<type>::detCore(std::vector<std::vector<type>> M, int n){
 template<class type>
 type squareMatrix<type>::det(){
 	// mask function for determinant function
-	if (rnc_ > 10)
+	if (this->rows_ > 10)
 	{
 		std::cout << "Warning: large matrix size\n";
 	}
-	return detCore(matrix_, rnc_);
+	return detCore(this->matrix_, this->rows_);
 }
+
+
+
+// template<class type>
+// type squareMatrix<type>::eigen(){
+// 	type ans = 0;
+
+
+// 	return ans; 
+// }
+
 

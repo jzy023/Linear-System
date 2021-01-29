@@ -1,23 +1,26 @@
-#ifndef matrix_H
-#define matrix_H
+#ifndef squareMatrix_H
+#define squareMatrix_H
 
 #include <math.h>
 #include <vector>
 #include <type_traits>
 
+#include "Matrix.H"
+
 template<class type>
-class squareMatrix {
+class squareMatrix : public Matrix<type>
+{
 	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
 
 private:
-	long unsigned int rnc_; // rows and columns
-	std::vector<std::vector<type>> matrix_;
+	// std::vector<std::vector<type>> matrix_;
 
 	static void checkMat(const squareMatrix<type> &m);
 	
 
 public:
 	// constructors
+	squareMatrix(){};
 	squareMatrix(long unsigned int n);
 
 	//build matrix_
@@ -27,11 +30,6 @@ public:
 	void resize();
 
 
-	// get rows, cols and particular element
-	/* int func() const -->  cannot call any non-const member functions,
-	   nor can it change any member variables.*/
-	int getSize() const { return rnc_; }
-	type getEle(int i, int j) const { return matrix_[i][j]; }
 
 	// return daigonal elemtents
 	std::vector<type> diag();
@@ -43,6 +41,9 @@ public:
 	type det(); // mast function
 	type detCore(std::vector<std::vector<type>> M, int n);
  
+	// QR decomposition
+
+
 	// calculate eigenvalue of M
 	type eigen();
 
