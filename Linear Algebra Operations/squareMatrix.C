@@ -103,13 +103,11 @@ type squareMatrix<type>::det(){
 }
 
 
+template<class type>
+type squareMatrix<type>::eigen(){
+	type ans = 0;
 
-// template<class type>
-// type squareMatrix<type>::eigen(){
-// 	type ans = 0;
-
-
-// 	return ans; 
-// }
+	return ans; 
+}
 
 

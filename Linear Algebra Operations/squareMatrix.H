@@ -27,8 +27,6 @@ public:
 	// resize matrix_ without ultering elements
 	void resize();
 
-
-
 	// return daigonal elemtents
 	std::vector<type> diag();
 
