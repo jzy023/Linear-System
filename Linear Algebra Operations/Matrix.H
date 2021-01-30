@@ -1,5 +1,5 @@
-#ifndef matrix_H
-#define matrix_H
+#ifndef MATRIX_H
+#define MATRIX_H
 
 #include <math.h>
 #include <vector>
@@ -19,13 +19,17 @@ class Matrix {
 		static void checkMat(const Matrix<type> &m);
 
 	public:
-	// constructor
+	// constructor & destructor
 	Matrix(){};
 	Matrix(long unsigned int rows, long unsigned int cols);
 	Matrix(std::vector<std::vector<int>> &m);
+	virtual ~Matrix() = default; // <-- ??
 
 	// build matrix
 	void build(const std::vector<type> &m); // <-- need improvement on security
+
+	// compute transpose
+	virtual Matrix<type> *T();
 
 	// operator overloads
 	void operator=(const Matrix<type> &m);

@@ -72,6 +72,20 @@ void Matrix<type>::build(const std::vector<type> &m)
 
 
 template<class type>
+Matrix<type> *Matrix<type>::T(){
+	std::vector<std::vector<type>> v(cols_,std::vector<type>(rows_));
+	for (int i = 0; i < rows_; i++)
+	{
+		for (int j = 0; j < cols_; j++)
+		{
+			v[j][i] = matrix_[i][j];
+		}
+	}
+	return new Matrix<type>(v);
+}
+
+
+template<class type>
 void Matrix<type>::operator=(const Matrix<type> &m){
 	clear();
 	rows_ = m.rows_;

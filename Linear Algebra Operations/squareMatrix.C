@@ -98,6 +98,20 @@ type squareMatrix<type>::det(){
 
 
 template<class type>
+squareMatrix<type> *squareMatrix<type>::T(){
+	std::vector<std::vector<type>> v(this->cols_,std::vector<type>(this->rows_));
+	for (int i = 0; i < this->rows_; i++)
+	{
+		for (int j = 0; j < this->cols_; j++)
+		{
+			v[j][i] = this->matrix_[i][j];
+		}
+	}
+	return new squareMatrix<type>(v);
+}
+
+
+template<class type>
 type squareMatrix<type>::eigen(){
 	type ans = 0;
 

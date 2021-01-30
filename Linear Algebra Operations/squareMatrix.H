@@ -1,5 +1,5 @@
-#ifndef squareMatrix_H
-#define squareMatrix_H
+#ifndef SQUAREMATRIX_H
+#define SQUAREMATRIX_H
 
 #include <math.h>
 #include <vector>
@@ -17,10 +17,11 @@ private:
 	
 
 public:
-	// constructors
+	// constructors & destructor
 	squareMatrix(){};
 	squareMatrix(long unsigned int n);
 	squareMatrix(std::vector<std::vector<type>> &m);
+	~squareMatrix() = default;
 
 	// resize matrix_ without ultering elements
 	void resize();
@@ -34,6 +35,9 @@ public:
 	// calculate determinant of M 
 	type det(); // mast function
 	type detCore(std::vector<std::vector<type>> M, int n);
+
+	// // compute transpose
+	squareMatrix<type> *T() override;
  
 	// QR decomposition
 
