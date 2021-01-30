@@ -19,20 +19,6 @@ Matrix<type>::Matrix(m)
 
 // PUBLIC METHODS
 template<class type>
-void squareMatrix<type>::build(const std::vector<type> &m)
-{
-	for (int i = 0; i < this->rows_; i++)
-	{
-		auto &row = this->matrix_[i];
-		for (int j = 0; j < this->rows_; ++j)
-		{
-			row[j] = m[i*this->rows_+j];
-		}
-	}
-}
-
-
-template<class type>
 std::vector<type> squareMatrix<type>::diag()
 {
 	if (this->rows_ != this->rows_)

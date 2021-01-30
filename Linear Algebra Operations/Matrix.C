@@ -28,8 +28,6 @@ Matrix<type>::Matrix(std::vector<std::vector<int>> &m)
 }
 
 
-
-
 // PRIVATE METHODS
 template<class type>
 void Matrix<type>::clear()
@@ -59,6 +57,20 @@ void Matrix<type>::checkMat(const Matrix<type> &m)
 
 
 // PUBLIC METHODS
+template<class type>
+void Matrix<type>::build(const std::vector<type> &m)
+{
+	for (int i = 0; i < rows_; i++)
+	{
+		auto &row = matrix_[i];
+		for (int j = 0; j < rows_; ++j)
+		{
+			row[j] = m[i*rows_+j];
+		}
+	}
+}
+
+
 template<class type>
 void Matrix<type>::operator=(const Matrix<type> &m){
 	clear();

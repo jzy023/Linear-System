@@ -24,6 +24,9 @@ class Matrix {
 	Matrix(long unsigned int rows, long unsigned int cols);
 	Matrix(std::vector<std::vector<int>> &m);
 
+	// build matrix
+	void build(const std::vector<type> &m); // <-- need improvement on security
+
 	// operator overloads
 	void operator=(const Matrix<type> &m);
 

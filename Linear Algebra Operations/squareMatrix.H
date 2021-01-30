@@ -22,9 +22,6 @@ public:
 	squareMatrix(long unsigned int n);
 	squareMatrix(std::vector<std::vector<type>> &m);
 
-	//build matrix_
-	void build(const std::vector<type> &m); // <-- need improvement on security
-
 	// resize matrix_ without ultering elements
 	void resize();
 
