@@ -7,26 +7,25 @@
 int main(int argc, char const *argv[])
 {	
 	// initiaization
-	std::vector<int> M{1,0,0,0,
+	std::vector<int> M1{1,0,0,0,
 					   1,1,0,0,
 					   1,1,1,0,
 					   1,1,1,1};
 	squareMatrix<int> myMat(4);
 
-	myMat.build(M);
+	myMat.build(M1);
 
-	std::vector<int> M2{1,1,1,1,
-						0,1,1,1,
-						0,0,1,1,
-						0,0,0,1};
-	squareMatrix<int> myMat2(4);
-	myMat2.build(M2);
+	std::vector<std::vector<int>> M2{{1,1,1,1},
+									 {0,1,1,1},
+									 {0,0,1,1},
+									 {0,0,0,1}};
+	squareMatrix<int> myMat2(M2);
+	// myMat2.build(M2);
 
-	std::vector<int> M3{1,1,1,
-						0,1,1,
-						0,0,1};
-	squareMatrix<int> myMat3(3);
-	myMat3.build(M3);
+	std::vector<int> row1{11,12,13};
+	std::vector<int> row2{21,22,23};
+	std::vector<std::vector<int>> M{row1,row2};
+	Matrix<int> myMat3(M);
 
 
 	// test outputs

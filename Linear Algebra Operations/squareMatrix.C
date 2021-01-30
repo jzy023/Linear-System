@@ -8,6 +8,14 @@ Matrix<type>::Matrix(n,n)
 	Matrix<type>::checkMat(*this);
 };
 
+template<class type>
+squareMatrix<type>::squareMatrix(std::vector<std::vector<type>> &m)
+:
+Matrix<type>::Matrix(m)
+{
+	Matrix<type>::checkMat(*this);
+};
+
 
 // PUBLIC METHODS
 template<class type>

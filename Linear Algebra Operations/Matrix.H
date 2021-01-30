@@ -20,8 +20,9 @@ class Matrix {
 
 	public:
 	// constructor
-	// Matrix(){};
+	Matrix(){};
 	Matrix(long unsigned int rows, long unsigned int cols);
+	Matrix(std::vector<std::vector<int>> &m);
 
 	// operator overloads
 	void operator=(const Matrix<type> &m);

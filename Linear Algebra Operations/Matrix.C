@@ -11,6 +11,25 @@ matrix_(std::vector<std::vector<type>>(rows,std::vector<type>(cols)))
 	checkMat(*this);
 }
 
+template<class type>
+Matrix<type>::Matrix(std::vector<std::vector<int>> &m)
+{
+	rows_ = m.size();
+	cols_ = m[0].size();
+	matrix_ = std::vector<std::vector<type>>(rows_,std::vector<type>(cols_));
+	for (int i = 0; i < rows_; i++)
+	{
+		for (int j = 0; j < cols_; j++)
+		{
+			matrix_[i][j] = m[i][j];
+		}
+	}
+	checkMat(*this);
+}
+
+
+
+
 // PRIVATE METHODS
 template<class type>
 void Matrix<type>::clear()
