@@ -12,7 +12,7 @@ class Matrix {
 	protected:
 		long unsigned int rows_;
 		long unsigned int cols_;
-		std::vector<std::vector<type>> matrix_;
+		std::vector<type> matrix_;
 
 		void clear();
 
@@ -23,20 +23,19 @@ class Matrix {
 	public:
 	// constructor & destructor
 	Matrix(){};
+	Matrix(std::vector<std::vector<type>> &m);
 	Matrix(long unsigned int rows, long unsigned int cols);
-	Matrix(std::vector<std::vector<int>> &m);
+	Matrix(long unsigned int rows, long unsigned int cols, std::vector<type> &m);
+	Matrix(long unsigned int rows, long unsigned int cols, std::vector<std::vector<type>> &m);
 	virtual ~Matrix() = default; // <-- ??
 
-	// getter functinos
+	// getter functions
 	/* int func() const -->  cannot call any non-const member functions,
 	   nor can it change any member variables.*/
 	std::vector<long unsigned int> size() const { return {rows_,cols_}; }
-	std::vector<std::vector<type>>& M() { return matrix_; }
+	std::vector<type>& M() { return matrix_; }
 	std::vector<type> Row( long unsigned int i );
 	std::vector<type> Col( long unsigned int i );
-
-	// build matrix
-	void build(const std::vector<type> &m); // <-- need improvement on security
 
 	// compute transpose
 	virtual Matrix<type> *T();

@@ -19,8 +19,11 @@ private:
 public:
 	// constructors & destructor
 	squareMatrix(){};
-	squareMatrix(long unsigned int n);
 	squareMatrix(std::vector<std::vector<type>> &m);
+	squareMatrix(long unsigned int n);
+	squareMatrix(long unsigned int n, std::vector<type> &m);
+	squareMatrix(long unsigned int n, std::vector<std::vector<type>> &m);
+	
 	~squareMatrix() = default;
 
 	// resize matrix_ without ultering elements
@@ -34,7 +37,7 @@ public:
 
 	// calculate determinant of M 
 	type det(); // mast function
-	type detCore(std::vector<std::vector<type>> M, int n);
+	type detCore(std::vector<type> M, int n);
 
 	// // compute transpose
 	squareMatrix<type> *T() override;
