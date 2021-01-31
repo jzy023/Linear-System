@@ -14,12 +14,19 @@ class Matrix {
 		long unsigned int cols_;
 		std::vector<type> matrix_;
 
-		void clear();
-
-		type inner(std::vector<type> &v1, std::vector<type> &v2);
-
 		static void checkMat(const Matrix<type> &m);
 
+		void clear();
+
+		type inner(std::vector<type> &v1, std::vector<type> &v2){
+			type ans = 0;
+			for (int i = 0; i < v1.size(); i++){
+				ans += v1[i]*v2[i];
+			}
+			return ans;
+		};
+
+		
 	public:
 	// constructor & destructor
 	Matrix(){};
@@ -34,14 +41,14 @@ class Matrix {
 	   nor can it change any member variables.*/
 	std::vector<long unsigned int> size() const { return {rows_,cols_}; }
 	std::vector<type>& M() { return matrix_; }
-	std::vector<type> Row( long unsigned int i );
-	std::vector<type> Col( long unsigned int i );
+	std::vector<type> Row(long unsigned int i) const;
+	std::vector<type> Col(long unsigned int i) const;
 
 	// compute transpose
 	virtual Matrix<type> *T();
 
 	// compute 
-
+	
 
 
 	// operator overloads
@@ -61,10 +68,13 @@ class Matrix {
 	void operator/=(const Matrix<type> &m);
 	void operator/=(const type val);
 
-
 	void operator&=(const Matrix<type> &m);
 
 
 };
+
+#ifdef NoRepository
+    #include "Matrix.C"
+#endif
 
 #endif

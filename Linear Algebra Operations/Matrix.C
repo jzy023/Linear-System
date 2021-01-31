@@ -5,20 +5,9 @@
 template<class type>
 void Matrix<type>::clear()
 {
-	matrix_ = {};
+	std::vector<type>().swap(matrix_);
 	rows_ = 0;
 	cols_ = 0;
-}
-
-template<class type>
-type inner(std::vector<type> &v1, std::vector<type> &v2)
-{
-	type ans = 0;
-	for (int i = 0; i < v1.size(); i++)
-	{
-		ans += v1[i]*v2[i];
-	}
-	return ans;
 }
 
 template<class type>
@@ -94,7 +83,7 @@ cols_(cols)
 
 // PUBLIC METHODS -------------------------------------------------------------
 template<class type>
-std::vector<type> Matrix<type>::Row( long unsigned int i )
+std::vector<type> Matrix<type>::Row( long unsigned int i ) const 
 {
 	std::vector<type> row(cols_);
 	for (int j = 0; j < cols_; j++)
@@ -105,7 +94,7 @@ std::vector<type> Matrix<type>::Row( long unsigned int i )
 }
 
 template<class type>
-std::vector<type> Matrix<type>::Col( long unsigned int j )
+std::vector<type> Matrix<type>::Col( long unsigned int j ) const 
 {
 	std::vector<type> col(rows_);
 	for (int i = 0; i < rows_; i++)
@@ -148,7 +137,8 @@ void Matrix<type>::operator=(const Matrix<type> &m)
 template<class type>
 void Matrix<type>::operator+=(const Matrix<type> &m)
 {
-	if (rows_ != m.rows_ || cols_ != m.cols_){
+	if (rows_ != m.rows_ || cols_ != m.cols_)
+	{
 		throw std::domain_error("matrices have different dimensions");
 	}
 	for (int i = 0; i < rows_; i++)
@@ -174,7 +164,8 @@ void Matrix<type>::operator+=(const type val)
 template<class type>
 void Matrix<type>::operator-=(const Matrix<type> &m)
 {
-	if (rows_ != m.rows_ || cols_ != m.cols_){
+	if (rows_ != m.rows_ || cols_ != m.cols_)
+	{
 		throw std::domain_error("matrices have different dimensions");
 	}
 	for (int i = 0; i < rows_; i++)
@@ -201,7 +192,8 @@ void Matrix<type>::operator-=(const type val)
 template<class type>
 void Matrix<type>::operator*=(const Matrix<type> &m)
 {
-	if (rows_ != m.rows_ || cols_ != m.cols_){
+	if (rows_ != m.rows_ || cols_ != m.cols_)
+	{
 		throw std::domain_error("matrices have different dimensions");
 	}
 	for (int i = 0; i < rows_; i++)
@@ -227,7 +219,8 @@ void Matrix<type>::operator*=(const type val)
 template<class type>
 void Matrix<type>::operator/=(const Matrix<type> &m)
 {
-	if (rows_ != m.rows_ || cols_ != m.cols_){
+	if (rows_ != m.rows_ || cols_ != m.cols_)
+	{
 		throw std::domain_error("matrices have different dimensions");
 	}
 	for (int i = 0; i < rows_; i++)
@@ -250,19 +243,25 @@ void Matrix<type>::operator/=(const type val)
 	}
 }
 
-// template<class type>
-// void Matrix<type>::operator&=(const Matrix<type> &m)
-// {
-// 	if (cols_ != m.rows_){
-// 		throw std::domain_error("matrices have different dimensions");
-// 	}
-// 	for (int i = 0; i < rows_; i++)
-// 	{
-// 		std::vector<type> row = matrix_[i];
-// 		for (int j = 0; j < cols_; j++)
-// 		{
-// 			std::vector<type> col = m.matrix_[][j];
-// 			matrix_[i][j] = Matrix<type>::inner(row, col);
-// 		}
-// 	}
-// }
+template<class type>
+void Matrix<type>::operator&=(const Matrix<type> &m)
+{
+	if (cols_ != m.rows_)
+	{
+		throw std::domain_error("illegal dimensions");
+	}
+	std::vector<type> tempM(rows_*m.cols_);
+	for (int i = 0; i < rows_; i++)
+	{
+		std::vector<type> row = Matrix<type>::Row(i);
+		for (int j = 0; j < m.cols_; j++)
+		{
+			std::vector<type> col = m.Col(j);
+			tempM[i*m.cols_+j] = Matrix<type>::inner(row, col);
+		}
+	}
+	clear();
+	rows_ = tempM.size()/m.cols_;
+	cols_ = m.cols_;
+	matrix_ = tempM;
+}

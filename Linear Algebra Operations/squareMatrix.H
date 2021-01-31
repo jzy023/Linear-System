@@ -54,4 +54,8 @@ public:
 
 };
 
+#ifdef NoRepository
+    #include "squareMatrix.C"
+#endif
+
 #endif
