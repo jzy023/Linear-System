@@ -35,10 +35,13 @@ int main(int argc, char const *argv[])
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			std::cout << myMatTran.getMat()[i][j] << ", ";
+			std::cout << myMatTran.M()[i][j] << ", ";
 		}
 		std::cout << "\n";
 	}
+
+	// myMat.Col(1);
+
 
 
 	return 0;

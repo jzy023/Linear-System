@@ -16,6 +16,8 @@ class Matrix {
 
 		void clear();
 
+		type inner(std::vector<type> &v1, std::vector<type> &v2);
+
 		static void checkMat(const Matrix<type> &m);
 
 	public:
@@ -25,13 +27,27 @@ class Matrix {
 	Matrix(std::vector<std::vector<int>> &m);
 	virtual ~Matrix() = default; // <-- ??
 
+	// getter functinos
+	/* int func() const -->  cannot call any non-const member functions,
+	   nor can it change any member variables.*/
+	std::vector<long unsigned int> size() const { return {rows_,cols_}; }
+	std::vector<std::vector<type>>& M() { return matrix_; }
+	std::vector<type> Row( long unsigned int i );
+	std::vector<type> Col( long unsigned int i );
+
 	// build matrix
 	void build(const std::vector<type> &m); // <-- need improvement on security
 
 	// compute transpose
 	virtual Matrix<type> *T();
 
+	// compute 
+
+
+
 	// operator overloads
+	type operator()(const long unsigned int i, const long unsigned int j);
+
 	void operator=(const Matrix<type> &m);
 
 	void operator+=(const Matrix<type> &m);
@@ -47,17 +63,8 @@ class Matrix {
 	void operator/=(const type val);
 
 
-	// get rows, cols and particular element
-	/* int func() const -->  cannot call any non-const member functions,
-	   nor can it change any member variables.*/
-	type getEle(int i, int j) const { return matrix_[i][j]; }
+	void operator&=(const Matrix<type> &m);
 
-	std::vector<std::vector<type>> getMat() const { return matrix_; }
-
-	std::vector<long unsigned int> getSize() const 
-	{
-		return {rows_,cols_}; 
-	}
 
 };
 
