@@ -1,7 +1,6 @@
 #include "Matrix.H"
 
-
-// PRIVATE METHODS -----------------------------------------------------------
+// PRIVATE METHODS ------------------------------------------------------------
 template<class type>
 void Matrix<type>::clear()
 {
@@ -117,6 +116,7 @@ Matrix<type> *Matrix<type>::T()
 	}
 	return new Matrix<type>(cols_,rows_,v);
 }
+
 
 template<class type>
 type Matrix<type>::operator()(const long unsigned int i, 

@@ -123,6 +123,49 @@ squareMatrix<type> *squareMatrix<type>::T(){
 }
 
 
+template<class type>
+std::vector<squareMatrix<type>> *squareMatrix<type>::LU(){
+	// Doolittle Algorithm
+	// credit: geeksforgeeks.org/doolittle-algorithm-lu-decomposition
+	int n = this->rows_;
+	std::vector<type> LMat(pow(n,2),0);
+	std::vector<type> UMat(pow(n,2),0);
+	for (int i = 0; i < n; i++)
+	{
+		// upper matrix 
+		for (int k = i; k < n; k++)
+		{
+			int sum = 0;
+			for (int j = 0; j < i; j++)
+			{
+				sum += (LMat[i*n+j]*UMat[j*n+k]);
+			}
+			UMat[i*n+k] = this->matrix_[i*n+k] - sum;
+		}
+		// lower matrix
+		for (int k = i; k < n; k++)
+		{
+			if (i == k)
+			{
+				LMat[i*n+i] = 1;
+			}
+			else
+			{
+				int sum = 0;
+				for (int j = 0; j < i; j++)
+				{
+					sum += LMat[k*n+j]*UMat[j*n+i];
+				}
+				LMat[k*n+i] = (this->matrix_[k*n+i] - sum)/UMat[i*n+i];
+			}
+		}
+	}
+	squareMatrix<type> L(n,LMat);
+	squareMatrix<type> U(n,UMat);
+	return new std::vector<squareMatrix<type>>{L,U};
+}
+
+
 // template<class type>
 // type squareMatrix<type>::eigen(){
 // 	type ans = 0;

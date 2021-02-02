@@ -30,20 +30,20 @@ public:
 	void resize();
 
 	// return daigonal elemtents
-	std::vector<type> diag();
+	inline std::vector<type> diag();
 
 	// return trace of M
-	type trace();
+	inline type trace();
 
 	// calculate determinant of M 
 	type det(); // mast function
 	type detCore(std::vector<type> M, int n);
 
-	// // compute transpose
-	squareMatrix<type> *T() override;
+	// compute transpose
+	inline squareMatrix<type> *T() override;
  
-	// QR decomposition
-
+	// LU decomposition
+	std::vector<squareMatrix<type>> *LU();
 
 	// calculate eigenvalue of M
 	type eigen();
@@ -53,9 +53,5 @@ public:
 
 
 };
-
-#ifdef NoRepository
-    #include "squareMatrix.C"
-#endif
 
 #endif

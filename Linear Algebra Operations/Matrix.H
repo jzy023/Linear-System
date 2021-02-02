@@ -2,6 +2,7 @@
 #define MATRIX_H
 
 #include <math.h>
+#include <map>
 #include <vector>
 #include <type_traits>
 
@@ -26,6 +27,17 @@ class Matrix {
 			return ans;
 		};
 
+		std::vector<type> outer(std::vector<type> &v1, std::vector<type> &v2){
+			std::vector<type> ans(v1.size()*v2.size());
+			for (int i = 0; i < v1.size(); i++){
+				for (int j = 0; j < v2.size(); j++){
+					ans(i*v2.size()+j) = v1[i]*v2[j];
+				}
+			}
+			return ans;
+		};
+
+
 		
 	public:
 	// constructor & destructor
@@ -39,15 +51,16 @@ class Matrix {
 	// getter functions
 	/* int func() const -->  cannot call any non-const member functions,
 	   nor can it change any member variables.*/
-	std::vector<long unsigned int> size() const { return {rows_,cols_}; }
-	std::vector<type>& M() { return matrix_; }
-	std::vector<type> Row(long unsigned int i) const;
-	std::vector<type> Col(long unsigned int i) const;
+	inline std::vector<long unsigned int> size() const { return {rows_,cols_}; }
+	inline std::vector<type>& M() { return matrix_; }
+	inline std::vector<type> Row(long unsigned int i) const;
+	inline std::vector<type> Col(long unsigned int i) const;
 
 	// compute transpose
 	virtual Matrix<type> *T();
 
-	// compute 
+	// QR decomposition 
+
 	
 
 
@@ -72,9 +85,5 @@ class Matrix {
 
 
 };
-
-#ifdef NoRepository
-    #include "Matrix.C"
-#endif
 
 #endif

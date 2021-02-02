@@ -13,10 +13,10 @@ int main(int argc, char const *argv[])
 					    1,1,1,1};
 	squareMatrix<int> myMat1(4,M1);
 
-	std::vector<std::vector<int>> M2{{1,1,1,1},
-									 {0,1,1,1},
-									 {0,0,1,1},
-									 {0,0,0,1}};
+	std::vector<std::vector<int>> M2{{2,2,1,2},
+									 {1,4,7,3},
+									 {1,1,2,1},
+									 {4,1,2,5}};
 	squareMatrix<int> myMat2(M2);
 
 	std::vector<int> row1{1};
@@ -48,6 +48,15 @@ int main(int argc, char const *argv[])
 		}
 		std::cout << "\n";
 	}
-	
+	std::cout << "-----------\n";
+
+	squareMatrix<int> myMatL((*myMat2.LU())[1]);
+	for (int i = 0; i < 4; i++){
+		for (int j = 0; j < 4; j++){
+			std::cout << myMatL.M()[i*4+j] << ", ";
+		}
+		std::cout << "\n";
+	}
+
 	return 0;
 }
