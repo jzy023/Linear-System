@@ -55,13 +55,12 @@ class Matrix {
 	inline std::vector<type>& M() { return matrix_; }
 	inline std::vector<type> Row(long unsigned int i) const;
 	inline std::vector<type> Col(long unsigned int i) const;
+	inline void show() const;
 
 	// compute transpose
 	virtual Matrix<type> *T();
 
 	// QR decomposition 
-
-	
 
 
 	// operator overloads

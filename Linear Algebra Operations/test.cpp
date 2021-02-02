@@ -32,31 +32,17 @@ int main(int argc, char const *argv[])
 	std::cout << "trace of M is " << myMat1.trace() << "\n";
 	std::cout << "determinant of M is " << myMat1.det() << "\n";
 
+	std::cout << "-----------\n";
 	Matrix<int> myMatTran(*myMat1.T());
-	for (int i = 0; i < myMat1.size()[0]; i++){
-		for (int j = 0; j < myMat1.size()[0]; j++){
-			std::cout << myMatTran.M()[i*myMat1.size()[0]+j] << ", ";
-		}
-		std::cout << "\n";
-	}
-	std::cout << "-----------\n";
+	myMatTran.show();
 
+	std::cout << "-----------\n";
 	myMat1 &= myMat3;
-	for (int i = 0; i < 4; i++){
-		for (int j = 0; j < 1; j++){
-			std::cout << myMat1.M()[i*1+j] << ", ";
-		}
-		std::cout << "\n";
-	}
-	std::cout << "-----------\n";
+	myMat1.show();
 
+	std::cout << "-----------\n";
 	squareMatrix<int> myMatL((*myMat2.LU())[1]);
-	for (int i = 0; i < 4; i++){
-		for (int j = 0; j < 4; j++){
-			std::cout << myMatL.M()[i*4+j] << ", ";
-		}
-		std::cout << "\n";
-	}
+	myMatL.show();
 
 	return 0;
 }

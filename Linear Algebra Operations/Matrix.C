@@ -104,6 +104,34 @@ std::vector<type> Matrix<type>::Col( long unsigned int j ) const
 }
 
 template<class type>
+void Matrix<type>::show() const
+{
+	std::cout << "returned matrix:\n";
+	for (int i = 0; i < rows_; i++){
+		for (int j = 0; j < cols_; j++){
+			if (j == 0 && cols_ != 1)
+			{
+				std::cout << "|" << matrix_[i*cols_+j] << ", ";
+			}
+			else if (j == 0 && cols_ == 1)
+			{
+				std::cout << "|" << matrix_[i*cols_+j] << "|";
+			}
+			else if (j == cols_-1)
+			{
+				std::cout << matrix_[i*cols_+j] << "|";
+			}
+			else
+			{
+				std::cout << matrix_[i*cols_+j] << ", ";
+			}
+		}
+		std::cout << "\n";
+	}
+}
+
+
+template<class type>
 Matrix<type> *Matrix<type>::T()
 {
 	std::vector<type> v(cols_*rows_);

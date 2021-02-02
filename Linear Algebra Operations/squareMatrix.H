@@ -44,6 +44,7 @@ public:
  
 	// LU decomposition
 	std::vector<squareMatrix<type>> *LU();
+	std::vector<squareMatrix<type>> *LU1();
 
 	// calculate eigenvalue of M
 	type eigen();

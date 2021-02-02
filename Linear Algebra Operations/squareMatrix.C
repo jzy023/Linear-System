@@ -132,32 +132,17 @@ std::vector<squareMatrix<type>> *squareMatrix<type>::LU(){
 	std::vector<type> UMat(pow(n,2),0);
 	for (int i = 0; i < n; i++)
 	{
-		// upper matrix 
 		for (int k = i; k < n; k++)
 		{
-			int sum = 0;
+			int sumU = 0;
+			int sumL = 0;
 			for (int j = 0; j < i; j++)
 			{
-				sum += (LMat[i*n+j]*UMat[j*n+k]);
+				sumU += (LMat[i*n+j]*UMat[j*n+k]);
+				sumL += LMat[k*n+j]*UMat[j*n+i];
 			}
-			UMat[i*n+k] = this->matrix_[i*n+k] - sum;
-		}
-		// lower matrix
-		for (int k = i; k < n; k++)
-		{
-			if (i == k)
-			{
-				LMat[i*n+i] = 1;
-			}
-			else
-			{
-				int sum = 0;
-				for (int j = 0; j < i; j++)
-				{
-					sum += LMat[k*n+j]*UMat[j*n+i];
-				}
-				LMat[k*n+i] = (this->matrix_[k*n+i] - sum)/UMat[i*n+i];
-			}
+			UMat[i*n+k] = this->matrix_[i*n+k] - sumU;
+			LMat[k*n+i] = (this->matrix_[k*n+i] - sumL)/UMat[i*n+i];
 		}
 	}
 	squareMatrix<type> L(n,LMat);
