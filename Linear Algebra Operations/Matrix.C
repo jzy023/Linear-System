@@ -22,6 +22,34 @@ void Matrix<type>::checkMat(const Matrix<type> &m)
 	}
 }
 
+template<class type>
+std::vector<type> Matrix<type>::Chunk(std::vector<int> &v1, std::vector<int> &v2)
+{
+	if (v1.size() != 2 || v2.size() != 2 ||
+		v1[0] >= v2[0] || v1[1] >= v2[1] )
+	{
+		throw std::domain_error("illegal input");
+	}
+	if (v1[0] < 0 || v2[0] < 0 ||
+		v1[1] < 0 || v2[1] < 0 ||
+		v1[0] > rows_ || v2[0] > rows_ || 
+		v1[1] > cols_ || v2[1] > cols_ )
+	{
+		throw std::domain_error("illegal input");
+	}
+	int newRows = v2[0] - v1[0] + 1;
+	int newCols = v2[1] - v1[1] + 1;
+	std::vector<type> v(newRows*newCols);
+	for (int i = v1[0]; i < v2[0]+1; i++)
+	{
+		for (int j = v1[1]; j < v2[1]+1; j++)
+		{
+			v[i*newCols+j] = matrix_[i*cols_+j];
+		}
+	}
+	return v;
+}
+
 
 // CONSTRUCTORS ---------------------------------------------------------------
 template<class type>
@@ -103,8 +131,9 @@ std::vector<type> Matrix<type>::Col( long unsigned int j ) const
 	return col;
 }
 
+
 template<class type>
-void Matrix<type>::show() const
+void Matrix<type>::Show() const
 {
 	std::cout << "returned matrix:\n";
 	for (int i = 0; i < rows_; i++){

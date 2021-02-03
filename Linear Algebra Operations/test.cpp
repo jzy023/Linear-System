@@ -34,15 +34,16 @@ int main(int argc, char const *argv[])
 
 	std::cout << "-----------\n";
 	Matrix<int> myMatTran(*myMat1.T());
-	myMatTran.show();
+	myMatTran.Show();
 
 	std::cout << "-----------\n";
 	myMat1 &= myMat3;
-	myMat1.show();
+	myMat1.Show();
 
 	std::cout << "-----------\n";
 	squareMatrix<int> myMatL((*myMat2.LU())[1]);
-	myMatL.show();
+	myMatL.Show();
+
 
 	return 0;
 }

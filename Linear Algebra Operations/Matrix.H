@@ -37,7 +37,7 @@ class Matrix {
 			return ans;
 		};
 
-
+		inline std::vector<type> Chunk(std::vector<int> &v1, std::vector<int> &v2);
 		
 	public:
 	// constructor & destructor
@@ -55,7 +55,10 @@ class Matrix {
 	inline std::vector<type>& M() { return matrix_; }
 	inline std::vector<type> Row(long unsigned int i) const;
 	inline std::vector<type> Col(long unsigned int i) const;
-	inline void show() const;
+
+	
+
+	inline void Show() const;
 
 	// compute transpose
 	virtual Matrix<type> *T();
