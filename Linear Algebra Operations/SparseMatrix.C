@@ -18,7 +18,7 @@ void sparseMatrix<type>::checkMat(const sparseMatrix<type> &m)
 		throw std::domain_error("matrix has empty dimensions");
 	}
 	if (m.ele_.size() != m.idx_.size())
-	{
+	{ 
 		throw std::domain_error("matrix has inconsistent dimensions");
 	}
 	if (*std::max_element(m.idx_.begin(),m.idx_.end()) > m.size()[0]*m.size()[1])

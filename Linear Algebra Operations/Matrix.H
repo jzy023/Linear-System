@@ -37,6 +37,28 @@ protected:
 		return ans;
 	};
 
+	type VNorm(std::vector<type> &v1, int i){
+		type ans = 0;
+		if (i == 1){
+			for (int i : v1){
+				ans += std::abs(i);
+			}
+			return ans;
+		} else if (i == 2){
+			for (int i : v1){
+				ans += i*i;
+			}
+			return std::sqrt(ans);
+		} else {
+			for (int i : v1){
+				ans = std::max(std::abs(i),ans);
+			}
+			return ans;
+		}
+	};
+
+	type Norm();
+
 	inline std::vector<type> chunk(std::vector<int> &v1, std::vector<int> &v2);
 		
 public:
