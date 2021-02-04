@@ -37,15 +37,23 @@ int main(int argc, char const *argv[])
 	Matrix<int> myMatTran(*myMat1.T());
 	myMatTran.Show();
 
-	std::cout << "-----------\n";
-	myMat1 &= myMat3;
-	myMat1.Show();
+	// std::cout << "-----------\n";
+	// myMat1 &= myMat3;
+	// myMat1.Show();
 
 	std::cout << "-----------\n";
 	squareMatrix<int> myMatL((*myMat2.LU())[1]);
 	myMatL.Show();
 
-	myMat1.Sparse();
+	std::cout << "-----------\n";
+	std::vector<long unsigned int> sparseSize = myMat1.size();
+	std::vector<std::vector<int>> sparseBuild = myMat1.Sparse();
+	sparseMatrix<int> mySpar(sparseSize,sparseBuild);
+	for (int i = 0; i < mySpar.Ele().size(); i++)
+	{
+		std::cout << "idx: " << mySpar.Idx()[i]
+				  << ", ele: " << mySpar.Ele()[i] << "\n";
+	}
 
 
 	return 0;

@@ -191,7 +191,7 @@ std::vector<std::vector<type>> Matrix<type>::Sparse()
 	int n = 0;
 	for (int i = 0; i < (rows_*cols_); i++)
 	{
-		if (i != 0)
+		if (matrix_[i] != 0)
 		{
 			ele[n] = matrix_[i];
 			idx[n] = i;

@@ -15,8 +15,8 @@ class sparseMatrix
 private:
 	long unsigned int rows_;
 	long unsigned int cols_;
-	std::vector<std::vector<type>> ele_;
-	std::vector<std::vector<type>> idx_;
+	std::vector<type> ele_;
+	std::vector<type> idx_;
 
 	static void checkMat(const sparseMatrix<type> &m);
 
@@ -43,9 +43,21 @@ private:
 public:
 	// constructors & destructor
 	sparseMatrix(){};
+	sparseMatrix(std::vector<long unsigned int> size);
+	sparseMatrix(std::vector<long unsigned int> size, std::vector<std::vector<type>> &m);
 	sparseMatrix(long unsigned int rows, long unsigned int cols);
 	sparseMatrix(long unsigned int rows, long unsigned int cols, std::vector<std::vector<type>> &m);
 	~sparseMatrix() = default;
+
+	// getter functions
+	/* int func() const -->  cannot call any non-const member functions,
+	   nor can it change any member variables.*/
+	inline std::vector<long unsigned int> size() const { return {rows_,cols_}; }
+	inline std::vector<type>& Idx() { return idx_; }
+	inline std::vector<type>& Ele() { return ele_; }
+	// inline std::vector<type> Row(long unsigned int i) const;
+	// inline std::vector<type> Col(long unsigned int i) const;
+	// inline void Show() const;
 
 
 };

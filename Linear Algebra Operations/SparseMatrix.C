@@ -13,7 +13,7 @@ void sparseMatrix<type>::clear()
 template<class type>
 void sparseMatrix<type>::checkMat(const sparseMatrix<type> &m)
 {
-	if (m.matrix_.empty())
+	if (m.idx_.empty() || m.ele_.empty())
 	{
 		throw std::domain_error("matrix has empty dimensions");
 	}
@@ -30,6 +30,27 @@ void sparseMatrix<type>::checkMat(const sparseMatrix<type> &m)
 
 // CONSTRUCTORS ---------------------------------------------------------------
 template<class type>
+sparseMatrix<type>::sparseMatrix(std::vector<long unsigned int> size)
+:
+rows_(size[0]),
+cols_(size[1])
+{
+	checkMat(*this);
+}
+
+template<class type>
+sparseMatrix<type>::sparseMatrix(std::vector<long unsigned int> size,
+								 std::vector<std::vector<type>> &m)
+:
+rows_(size[0]),
+cols_(size[1]),
+idx_(m[0]),
+ele_(m[1])
+{
+	checkMat(*this);
+}
+
+template<class type>
 sparseMatrix<type>::sparseMatrix(long unsigned int rows, long unsigned int cols)
 :
 rows_(rows),
@@ -45,8 +66,8 @@ sparseMatrix<type>::sparseMatrix(long unsigned int rows,
 :
 rows_(rows),
 cols_(cols),
-ele_(m[0]),
-idx_(m[1])
+idx_(m[0]),
+ele_(m[1])
 {
 	checkMat(*this);
 }
