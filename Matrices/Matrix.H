@@ -57,7 +57,14 @@ protected:
 		}
 	};
 
-	type Norm();
+	type Norm(){
+		type ans = 0;
+		for (int i : matrix_)
+		{
+			ans += i*i;
+		}
+		return std::sqrt(ans);
+	};
 
 	inline std::vector<type> chunk(std::vector<int> &v1, std::vector<int> &v2);
 		
