@@ -202,8 +202,9 @@ std::vector<std::vector<type>> Matrix<type>::Sparse()
 }
 
 
+// OPERATORS ------------------------------------------------------------------
 template<class type>
-type Matrix<type>::operator()(const long unsigned int i, 
+type& Matrix<type>::operator()(const long unsigned int i, 
 							  const long unsigned int j)
 {
 	return matrix_[i*cols_+j]; 
@@ -348,4 +349,26 @@ void Matrix<type>::operator&=(const Matrix<type> &m)
 	rows_ = tempM.size()/m.cols_;
 	cols_ = m.cols_;
 	matrix_ = tempM;
+}
+
+template<class type>
+Matrix<type>* Matrix<type>::operator&(const Matrix<type> &m)
+{
+	if (cols_ != m.rows_)
+	{
+		throw std::domain_error("illegal dimensions");
+	}
+	std::vector<type> tempM(rows_*m.cols_);
+	for (int i = 0; i < rows_; i++)
+	{
+		std::vector<type> row = Matrix<type>::Row(i);
+		for (int j = 0; j < m.cols_; j++)
+		{
+			std::vector<type> col = m.Col(j);
+			tempM[i*m.cols_+j] = Matrix<type>::inner(row, col);
+		}
+	}
+	long unsigned int rows = tempM.size()/m.cols_;
+	long unsigned int cols = m.cols_;
+	return new Matrix<type>(rows,cols,tempM);
 }

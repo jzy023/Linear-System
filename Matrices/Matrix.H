@@ -57,15 +57,6 @@ protected:
 		}
 	};
 
-	type Norm(){
-		type ans = 0;
-		for (int i : matrix_)
-		{
-			ans += i*i;
-		}
-		return std::sqrt(ans);
-	};
-
 	inline std::vector<type> chunk(std::vector<int> &v1, std::vector<int> &v2);
 		
 public:
@@ -92,25 +83,32 @@ public:
 	// return sparse version of squareMatrix
 	inline std::vector<std::vector<type>> Sparse();
 
+	// return Norm <-- NEED IMPROVEMENT!!
+	type Norm(){
+		type ans = 0;
+		for (type i : matrix_)
+		{
+			ans += i*i;
+		}
+		return std::sqrt(ans);
+	};
 
 	// operator overloads
-	type operator()(const long unsigned int i, const long unsigned int j);
-
+	type& operator()(const long unsigned int i, const long unsigned int j);
 	void operator=(const Matrix<type> &m);
 
 	void operator+=(const Matrix<type> &m);
 	void operator+=(const type val);
-
 	void operator-=(const Matrix<type> &m);
 	void operator-=(const type val);
-
 	void operator*=(const Matrix<type> &m);
 	void operator*=(const type val);
-
 	void operator/=(const Matrix<type> &m);
 	void operator/=(const type val);
-
 	void operator&=(const Matrix<type> &m);
+
+	Matrix<type>* operator&(const Matrix<type> &m);
+
 
 
 };

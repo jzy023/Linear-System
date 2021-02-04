@@ -1,5 +1,5 @@
-#ifndef SPARSEMATRIX_H
-#define SPARSEMATRIX_H
+#ifndef SparseMATRIX_H
+#define SparseMATRIX_H
 
 #include <math.h>
 #include <vector>

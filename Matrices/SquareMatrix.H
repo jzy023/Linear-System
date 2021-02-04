@@ -1,5 +1,5 @@
-#ifndef SQUAREMATRIX_H
-#define SQUAREMATRIX_H
+#ifndef SquareMATRIX_H
+#define SquareMATRIX_H
 
 #include <math.h>
 #include <vector>
@@ -40,7 +40,7 @@ public:
 	type DetCore(std::vector<type> M, int n);
 
 	// compute transpose
-	inline squareMatrix<type> *T() override;
+	squareMatrix<type> *T() override;
  
 	// LU decomposition
 	std::vector<squareMatrix<type>> *LU();
@@ -51,7 +51,6 @@ public:
 
 	// calculate eigenvector of M
 	squareMatrix<type> EigenVec(); 
-
 
 };
 

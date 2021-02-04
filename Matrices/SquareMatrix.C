@@ -178,3 +178,4 @@ std::vector<squareMatrix<type>> *squareMatrix<type>::LU(){
 // }
 
 
+
