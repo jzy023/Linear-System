@@ -3,7 +3,7 @@
 This repo consists of source code of some basic linear system operations, for exercise purposes.
 
 
-## Linear Algebra Operations
+## Matrices
 
 class names:
 
@@ -12,3 +12,8 @@ class names:
 - squareMatrix
 
 - sparseMatrix
+
+
+## Solvers
+
+- Jacobi
