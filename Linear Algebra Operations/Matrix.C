@@ -23,7 +23,7 @@ void Matrix<type>::checkMat(const Matrix<type> &m)
 }
 
 template<class type>
-std::vector<type> Matrix<type>::Chunk(std::vector<int> &v1, std::vector<int> &v2)
+std::vector<type> Matrix<type>::chunk(std::vector<int> &v1, std::vector<int> &v2)
 {
 	if (v1.size() != 2 || v2.size() != 2 ||
 		v1[0] >= v2[0] || v1[1] >= v2[1] )

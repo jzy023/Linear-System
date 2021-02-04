@@ -3,6 +3,7 @@
 // tested functionalities
 #include "Matrix.C"
 #include "SquareMatrix.C"
+#include "SparseMatrix.C"
 
 int main(int argc, char const *argv[])
 {	
