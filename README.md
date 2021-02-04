@@ -5,6 +5,10 @@ This repo consists of source code of some basic linear system operations, for ex
 
 ## Linear Algebra Operations
 
+class names:
+
 - Matrix
 
 - squareMatrix
+
+- sparseMatrix
