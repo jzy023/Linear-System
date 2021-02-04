@@ -74,3 +74,53 @@ ele_(m[1])
 
 
 // PUBLIC METHODS -------------------------------------------------------------
+template<class type>
+void sparseMatrix<type>::Show() const
+{
+	std::cout << "returned matrix:\n";
+	for (int i = 0; i < idx_.size(); i++){
+		if (idx_.size() > 5){
+			if (i > 2 && i < idx_.size() - 2)
+				continue;
+			if (i == 0)
+				std::cout << "idx: |" << idx_[i] << ", ";
+			else if (i == 2)
+				std::cout << "..., ";
+			else if (i == idx_.size() - 1)
+				std::cout << idx_[i] << "|\n";
+			else
+				std::cout << idx_[i] << ", ";
+		}
+		else{
+			if (i == 0)
+				std::cout << "idx: |" << idx_[i] << ", ";
+			else if (i == idx_.size() - 1)
+				std::cout << idx_[i] << "|\n";
+			else
+				std::cout << idx_[i] << ", ";
+		}
+	}
+	for (int i = 0; i < idx_.size(); i++){
+		if (idx_.size() > 5){
+			if (i > 2 && i < idx_.size() - 2)
+				continue;
+			if (i == 0)
+				std::cout << "ele: |" << ele_[i] << ", ";
+			else if (i == 2)
+				std::cout << "..., ";
+			else if (i == idx_.size() - 1)
+				std::cout << ele_[i] << "|\n";
+			else
+				std::cout << ele_[i] << ", ";
+		}
+		else{
+			if (i == 0)
+				std::cout << "ele: |" << ele_[i] << ", ";
+			else if (i == idx_.size() - 1)
+				std::cout << ele_[i] << "|\n";
+			else
+				std::cout << ele_[i] << ", ";
+		}
+	}
+}
+

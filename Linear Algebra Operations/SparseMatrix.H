@@ -57,7 +57,7 @@ public:
 	inline std::vector<type>& Ele() { return ele_; }
 	// inline std::vector<type> Row(long unsigned int i) const;
 	// inline std::vector<type> Col(long unsigned int i) const;
-	// inline void Show() const;
+	inline void Show() const;
 
 
 };
