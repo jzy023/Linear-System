@@ -1,5 +1,22 @@
-#include "squareMatrix.H"
+#include "SquareMatrix.H"
 
+// PRIVATE METHODS ------------------------------------------------------------
+template<class type>
+void squareMatrix<type>::checkSquareMat(const squareMatrix<type> &m)
+{
+	if (m.matrix_.empty())
+	{
+		throw std::domain_error("matrix has empty dimensions");
+	}
+	if (m.matrix_.size() != m.size()[0]*m.size()[1])
+	{
+		throw std::domain_error("matrix has inconsistent dimensions");
+	}
+	if (m.size()[0] != m.size()[1])
+	{
+		throw std::domain_error("matrix is not square");
+	}
+}
 
 // CONSTRUCTORS ---------------------------------------------------------------
 template<class type>
@@ -7,7 +24,7 @@ squareMatrix<type>::squareMatrix(std::vector<std::vector<type>> &m)
 :
 Matrix<type>::Matrix(m)
 {
-	Matrix<type>::checkMat(*this);
+	checkSquareMat(*this);
 };
 
 template<class type>
@@ -15,7 +32,7 @@ squareMatrix<type>::squareMatrix(long unsigned int n)
 :
 Matrix<type>::Matrix(n,n)
 {
-	Matrix<type>::checkMat(*this);
+	checkSquareMat(*this);
 };
 
 template<class type>
@@ -24,7 +41,7 @@ squareMatrix<type>::squareMatrix(long unsigned int n,
 :
 Matrix<type>::Matrix(n,n,m)
 {
-	Matrix<type>::checkMat(*this);
+	checkSquareMat(*this);
 };
 
 template<class type>
@@ -33,13 +50,13 @@ squareMatrix<type>::squareMatrix(long unsigned int n,
 :
 Matrix<type>::Matrix(n,n,m)
 {
-	Matrix<type>::checkMat(*this);
+	checkSquareMat(*this);
 };
 
 
 // PUBLIC METHODS -------------------------------------------------------------
 template<class type>
-std::vector<type> squareMatrix<type>::diag()
+std::vector<type> squareMatrix<type>::Diag()
 {
 	std::vector<type> ans(this->rows_,0);
 	for (int i = 0; i < this->rows_; i++)
@@ -49,8 +66,9 @@ std::vector<type> squareMatrix<type>::diag()
 	return ans;
 }
 
+
 template<class type>
-type squareMatrix<type>::trace()
+type squareMatrix<type>::Trace()
 {
 	type ans = 0.0;
 	for (int i = 0; i < this->rows_; i++){
@@ -59,8 +77,9 @@ type squareMatrix<type>::trace()
 	return ans;
 }
 
+
 template<class type>
-type squareMatrix<type>::detCore(std::vector<type> M, int n){
+type squareMatrix<type>::DetCore(std::vector<type> M, int n){
 	// credit: tutorialspoint.com/cplusplus-program-to-compute-determinant-of-a-matrix
 	type det = 0;
 	std::vector<type> subM(pow(n-1,2));
@@ -92,20 +111,20 @@ type squareMatrix<type>::detCore(std::vector<type> M, int n){
 				}
 				subi++;
 			}
-			type now = (pow(-1,x)*M[x]*detCore(subM,n-1));
+			type now = (pow(-1,x)*M[x]*DetCore(subM,n-1));
 			det += now; 
 		}
 	}
 	return det;
 }
 template<class type>
-type squareMatrix<type>::det(){
+type squareMatrix<type>::Det(){
 	// mask function for determinant function
 	if (this->rows_ > 10)
 	{
 		std::cout << "Warning: large matrix size\n";
 	}
-	return detCore(this->matrix_, this->rows_);
+	return DetCore(this->matrix_, this->rows_);
 }
 
 

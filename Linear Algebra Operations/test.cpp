@@ -2,7 +2,7 @@
 
 // tested functionalities
 #include "Matrix.C"
-#include "squareMatrix.C"
+#include "SquareMatrix.C"
 
 int main(int argc, char const *argv[])
 {	
@@ -24,13 +24,13 @@ int main(int argc, char const *argv[])
 	std::vector<int> row3{1};
 	std::vector<int> row4{1};
 	std::vector<std::vector<int>> M3{row1,row2,row3,row4};
-	squareMatrix<int> myMat3(M3);
+	Matrix<int> myMat3(M3);
 
 	Matrix<int> myMat4 = myMat3;
 
 	// test outputs
-	std::cout << "trace of M is " << myMat1.trace() << "\n";
-	std::cout << "determinant of M is " << myMat1.det() << "\n";
+	std::cout << "trace of M is " << myMat1.Trace() << "\n";
+	std::cout << "determinant of M is " << myMat1.Det() << "\n";
 
 	std::cout << "-----------\n";
 	Matrix<int> myMatTran(*myMat1.T());
@@ -43,6 +43,8 @@ int main(int argc, char const *argv[])
 	std::cout << "-----------\n";
 	squareMatrix<int> myMatL((*myMat2.LU())[1]);
 	myMatL.Show();
+
+	myMat1.Sparse();
 
 
 	return 0;

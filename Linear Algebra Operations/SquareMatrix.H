@@ -14,6 +14,7 @@ class squareMatrix : public Matrix<type>
 
 private:
 	// std::vector<std::vector<type>> matrix_;
+	static void checkSquareMat(const squareMatrix<type> &m);
 	
 
 public:
@@ -23,21 +24,20 @@ public:
 	squareMatrix(long unsigned int n);
 	squareMatrix(long unsigned int n, std::vector<type> &m);
 	squareMatrix(long unsigned int n, std::vector<std::vector<type>> &m);
-	
 	~squareMatrix() = default;
 
 	// resize matrix_ without ultering elements
-	void resize();
+	void Resize();
 
-	// return daigonal elemtents
-	inline std::vector<type> diag();
+	// return diagonal elemtents
+	inline std::vector<type> Diag();
 
 	// return trace of M
-	inline type trace();
+	inline type Trace();
 
 	// calculate determinant of M 
-	type det(); // mast function
-	type detCore(std::vector<type> M, int n);
+	type Det(); // mast function
+	type DetCore(std::vector<type> M, int n);
 
 	// compute transpose
 	inline squareMatrix<type> *T() override;
@@ -47,10 +47,10 @@ public:
 	std::vector<squareMatrix<type>> *LU1();
 
 	// calculate eigenvalue of M
-	type eigen();
+	type Eigen();
 
 	// calculate eigenvector of M
-	squareMatrix<type> eigenVec(); 
+	squareMatrix<type> EigenVec(); 
 
 
 };

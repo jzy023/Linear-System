@@ -55,15 +55,13 @@ class Matrix {
 	inline std::vector<type>& M() { return matrix_; }
 	inline std::vector<type> Row(long unsigned int i) const;
 	inline std::vector<type> Col(long unsigned int i) const;
-
-	
-
 	inline void Show() const;
 
 	// compute transpose
 	virtual Matrix<type> *T();
 
-	// QR decomposition 
+	// return sparse version of squareMatrix
+	inline std::vector<std::vector<type>> Sparse();
 
 
 	// operator overloads

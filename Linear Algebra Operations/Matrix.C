@@ -176,6 +176,33 @@ Matrix<type> *Matrix<type>::T()
 
 
 template<class type>
+std::vector<std::vector<type>> Matrix<type>::Sparse()
+{
+	int len = 0;
+	for (int i : matrix_)
+	{
+		if (i != 0)
+		{
+			len++;
+		}
+	}
+	std::vector<type> ele(len);
+	std::vector<type> idx(len);
+	int n = 0;
+	for (int i = 0; i < (rows_*cols_); i++)
+	{
+		if (i != 0)
+		{
+			ele[n] = matrix_[i];
+			idx[n] = i;
+			n++;
+		}
+	}
+	return std::vector<std::vector<type>> {idx,ele};
+}
+
+
+template<class type>
 type Matrix<type>::operator()(const long unsigned int i, 
 							  const long unsigned int j)
 {
