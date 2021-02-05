@@ -4,27 +4,31 @@
 template<class type>
 Matrix<type> linearSystem<type>::ini(Matrix<type> &A, Matrix<type> &b)
 {
-	std::vector<std::vector<type>> ans(b.size()[0],{1});
-	for (int i = 0; i < A.size()[0]; i++)
+	std::vector<std::vector<type>> ans(b.size(0),{1});
+	for (int i = 0; i < A.size(0); i++)
 	{
 		ans[i][0] = b(i,0)/A(i,i);
 	}
 	return Matrix<type>(ans);
 }
 
-// template<class type>
-// void linearSystem<type>::checkSys(const linearSystem<type> &s)
-// {
-// 	if (s.A_.size()[0] != s.A_.size()[1] ||
-// 		s.A_.size()[0] != s.b_.size())
-// 	{
-// 		throw std::domain_error("matrix has inconsistent dimensions");
-// 	}
-// 	if (s.b_.size()[1] != 1)
-// 	{
-// 		throw std::domain_error("illegal dimension for matrix b");
-// 	}
-// }
+template<class type>
+void linearSystem<type>::checkSys(const linearSystem<type> &s)
+{
+	if (!std::is_floating_point<type>::value)
+	{
+		throw std::domain_error("matrix must have floating type");
+	}
+	if (s.A_.size(0) != s.A_.size(1) ||
+		s.A_.size(0) != s.b_.size())
+	{
+		throw std::domain_error("matrix has inconsistent dimensions");
+	}
+	if (s.b_.size()[1] != 1)
+	{
+		throw std::domain_error("illegal dimension for matrix b");
+	}
+}
 
 // CONSTRUCTORS ---------------------------------------------------------------
 template<class type>
@@ -77,16 +81,16 @@ template<class type>
 Matrix<type> linearSystem<type>::Jacobi()
 {
 	Matrix<type> xPrev = xIni_;
-	Matrix<type> x(b_.size()[0],b_.size()[1]);
+	Matrix<type> x(b_.size(0),b_.size(1));
 	Matrix<type> solu; // <-- NEED IMPROVEMENT!!!
 	int iter = 0;
 	double err = 1.0;
 	while (iter < maxIter_ && err > tol_)
 	{
-		for (int i = 0; i < A_.size()[0]; i++)
+		for (int i = 0; i < A_.size(0); i++)
 		{
 			type sum = 0;
-			for (int j = 1; j < b_.size()[0]; j++)
+			for (int j = 1; j < b_.size(0); j++)
 			{
 				if (i == j)
 				{

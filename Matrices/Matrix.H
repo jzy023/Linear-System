@@ -8,7 +8,8 @@
 
 template<class type>
 class Matrix {
-	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
+	// static_assert(std::is_floating_point<type>::value, 
+	// 	"Type must be either double or float");
 
 protected:
 	long unsigned int rows_;
@@ -40,17 +41,17 @@ protected:
 	type VNorm(std::vector<type> &v1, int i){
 		type ans = 0;
 		if (i == 1){
-			for (int i : v1){
+			for (type i : v1){
 				ans += std::abs(i);
 			}
 			return ans;
 		} else if (i == 2){
-			for (int i : v1){
+			for (type i : v1){
 				ans += i*i;
 			}
 			return std::sqrt(ans);
 		} else {
-			for (int i : v1){
+			for (type i : v1){
 				ans = std::max(std::abs(i),ans);
 			}
 			return ans;
@@ -71,6 +72,7 @@ public:
 	// getter functions
 	/* int func() const -->  cannot call any non-const member functions,
 	   nor can it change any member variables.*/
+	inline long unsigned int size(int i) const { return (i == 0)?rows_:cols_; }
 	inline std::vector<long unsigned int> size() const { return {rows_,cols_}; }
 	inline std::vector<type>& M() { return matrix_; }
 	inline std::vector<type> Row(long unsigned int i) const;
@@ -84,14 +86,7 @@ public:
 	inline std::vector<std::vector<type>> Sparse();
 
 	// return Norm <-- NEED IMPROVEMENT!!
-	type Norm(){
-		type ans = 0;
-		for (type i : matrix_)
-		{
-			ans += i*i;
-		}
-		return std::sqrt(ans);
-	};
+	inline type Norm();
 
 	// operator overloads
 	type& operator()(const long unsigned int i, const long unsigned int j);

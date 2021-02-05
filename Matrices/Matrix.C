@@ -12,6 +12,10 @@ void Matrix<type>::clear()
 template<class type>
 void Matrix<type>::checkMat(const Matrix<type> &m)
 {
+	if (!std::is_floating_point<type>::value)
+	{
+		throw std::domain_error("matrix must have floating type");
+	}
 	if (m.matrix_.empty())
 	{
 		throw std::domain_error("matrix has empty dimensions");
@@ -200,6 +204,18 @@ std::vector<std::vector<type>> Matrix<type>::Sparse()
 	}
 	return std::vector<std::vector<type>> {idx,ele};
 }
+
+
+template<class type> // <-- NEED IMPROVEMENT!!
+type Matrix<type>::Norm()
+{
+	type ans = 0;
+	for (type i : matrix_)
+	{
+		ans += i*i;
+	}
+	return std::sqrt(ans);
+};
 
 
 // OPERATORS ------------------------------------------------------------------
