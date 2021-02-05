@@ -8,33 +8,33 @@
 int main(int argc, char const *argv[])
 {	
 	// initiaization
-	std::vector<int> M1{1,0,0,0,
-					    1,1,0,0,
-					    1,1,1,0,
-					    1,1,1,1};
-	squareMatrix<int> myMat1(4,M1);
+	std::vector<double> M1{1,0,0,0,
+					       1,1,0,0,
+					       1,1,1,0,
+					       1,1,1,1};
+	squareMatrix<double> myMat1(4,M1);
 
-	std::vector<std::vector<int>> M2{{2,2,1,2},
+	std::vector<std::vector<double>> M2{{2,2,1,2},
 									 {1,4,7,3},
 									 {1,1,2,1},
 									 {4,1,2,5}};
-	squareMatrix<int> myMat2(M2);
+	squareMatrix<double> myMat2(M2);
 
-	std::vector<int> row1{1};
-	std::vector<int> row2{1};
-	std::vector<int> row3{1};
-	std::vector<int> row4{1};
-	std::vector<std::vector<int>> M3{row1,row2,row3,row4};
-	Matrix<int> myMat3(M3);
+	std::vector<double> row1{1};
+	std::vector<double> row2{1};
+	std::vector<double> row3{1};
+	std::vector<double> row4{1};
+	std::vector<std::vector<double>> M3{row1,row2,row3,row4};
+	Matrix<double> myMat3(M3);
 
-	Matrix<int> myMat4 = myMat3;
+	Matrix<double> myMat4 = myMat3;
 
 	// test outputs
 	std::cout << "trace of M is " << myMat1.Trace() << "\n";
 	std::cout << "determinant of M is " << myMat1.Det() << "\n";
 
 	std::cout << "-----------\n";
-	Matrix<int> myMatTran(*myMat1.T());
+	Matrix<double> myMatTran(*myMat1.T());
 	myMatTran.Show();
 
 	std::cout << "-----------\n";
@@ -42,13 +42,13 @@ int main(int argc, char const *argv[])
 	myMat1.Show();
 
 	std::cout << "-----------\n";
-	squareMatrix<int> myMatL((*myMat2.LU())[1]);
+	squareMatrix<double> myMatL((*myMat2.LU())[1]);
 	myMatL.Show();
 
 	std::cout << "-----------\n";
 	std::vector<long unsigned int> sparseSize = myMatTran.size();
-	std::vector<std::vector<int>> sparseBuild = myMatTran.Sparse();
-	sparseMatrix<int> mySpar(sparseSize,sparseBuild);
+	std::vector<std::vector<double>> sparseBuild = myMatTran.Sparse();
+	sparseMatrix<double> mySpar(sparseSize,sparseBuild);
 	mySpar.Show();
 
 

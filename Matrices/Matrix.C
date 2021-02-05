@@ -139,25 +139,24 @@ std::vector<type> Matrix<type>::Col( long unsigned int j ) const
 template<class type>
 void Matrix<type>::Show() const
 {
+	int setw = 1; int perc = 4;
+	int max = *std::max_element(matrix_.begin(),matrix_.end());
+	if (max == 0) setw++;
+	while(max != 0){
+		max /= 10; setw++;
+	}
+	std::cout << std::fixed << std::setprecision(perc) << std::setfill(' ');
 	std::cout << "returned matrix:\n";
 	for (int i = 0; i < rows_; i++){
 		for (int j = 0; j < cols_; j++){
 			if (j == 0 && cols_ != 1)
-			{
-				std::cout << "|" << matrix_[i*cols_+j] << ", ";
-			}
+				std::cout << "|" << std::setw(setw + perc + 1) << matrix_[i*cols_+j] << ", ";
 			else if (j == 0 && cols_ == 1)
-			{
-				std::cout << "|" << matrix_[i*cols_+j] << "|";
-			}
+				std::cout << "|" << std::setw(setw + perc + 1) << matrix_[i*cols_+j] << "|";
 			else if (j == cols_-1)
-			{
-				std::cout << matrix_[i*cols_+j] << "|";
-			}
+				std::cout << std::setw(setw + perc + 1) << matrix_[i*cols_+j] << "|";
 			else
-			{
-				std::cout << matrix_[i*cols_+j] << ", ";
-			}
+				std::cout << std::setw(setw + perc + 1) << matrix_[i*cols_+j] << ", ";
 		}
 		std::cout << "\n";
 	}

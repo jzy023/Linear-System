@@ -33,7 +33,7 @@ int main()
 	std::cout << "-----------\n";
 
 
-	Matrix<double> solution2 = mySys.SOR(0.5);
+	Matrix<double> solution2 = mySys.SOR(0.9);
 	std::cout << "-----------\n";
 	solution2.Show();
 	std::cout << "-----------\n";

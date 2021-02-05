@@ -13,6 +13,10 @@ void sparseMatrix<type>::clear()
 template<class type>
 void sparseMatrix<type>::checkMat(const sparseMatrix<type> &m)
 {
+	if (!std::is_floating_point<type>::value)
+	{
+		throw std::domain_error("matrix must have floating type");
+	}
 	if (m.idx_.empty() || m.ele_.empty())
 	{
 		throw std::domain_error("matrix has empty dimensions");
@@ -77,27 +81,34 @@ ele_(m[1])
 template<class type>
 void sparseMatrix<type>::Show() const
 {
+	int setw = 1; int perc = 4;
+	int max = *std::max_element(ele_.begin(),ele_.end());
+	if (max == 0) setw++;
+	while(max != 0){
+		max /= 10; setw++;
+	}
+	std::cout << std::fixed << std::setprecision(perc) << std::setfill(' ');
 	std::cout << "returned matrix:\n";
 	for (int i = 0; i < idx_.size(); i++){
 		if (idx_.size() > 5){
 			if (i > 2 && i < idx_.size() - 2)
 				continue;
 			if (i == 0)
-				std::cout << "idx: |" << idx_[i] << ", ";
+				std::cout << "idx: |" << std::setw(setw + perc + 1) << idx_[i] << ", ";
 			else if (i == 2)
 				std::cout << "..., ";
 			else if (i == idx_.size() - 1)
-				std::cout << idx_[i] << "|\n";
+				std::cout << std::setw(setw + perc + 1) << idx_[i] << "|\n";
 			else
-				std::cout << idx_[i] << ", ";
+				std::cout << std::setw(setw + perc + 1) << idx_[i] << ", ";
 		}
 		else{
 			if (i == 0)
-				std::cout << "idx: |" << idx_[i] << ", ";
+				std::cout << "idx: |" << std::setw(setw + perc + 1) << idx_[i] << ", ";
 			else if (i == idx_.size() - 1)
-				std::cout << idx_[i] << "|\n";
+				std::cout << std::setw(setw + perc + 1) << idx_[i] << "|\n";
 			else
-				std::cout << idx_[i] << ", ";
+				std::cout << std::setw(setw + perc + 1) << idx_[i] << ", ";
 		}
 	}
 	for (int i = 0; i < idx_.size(); i++){
@@ -105,21 +116,21 @@ void sparseMatrix<type>::Show() const
 			if (i > 2 && i < idx_.size() - 2)
 				continue;
 			if (i == 0)
-				std::cout << "ele: |" << ele_[i] << ", ";
+				std::cout << "ele: |" << std::setw(setw + perc + 1) << ele_[i] << ", ";
 			else if (i == 2)
 				std::cout << "..., ";
 			else if (i == idx_.size() - 1)
-				std::cout << ele_[i] << "|\n";
+				std::cout << std::setw(setw + perc + 1) << ele_[i] << "|\n";
 			else
-				std::cout << ele_[i] << ", ";
+				std::cout << std::setw(setw + perc + 1) << ele_[i] << ", ";
 		}
 		else{
 			if (i == 0)
-				std::cout << "ele: |" << ele_[i] << ", ";
+				std::cout << "ele: |" << std::setw(setw + perc + 1) << ele_[i] << ", ";
 			else if (i == idx_.size() - 1)
-				std::cout << ele_[i] << "|\n";
+				std::cout << std::setw(setw + perc + 1) << ele_[i] << "|\n";
 			else
-				std::cout << ele_[i] << ", ";
+				std::cout << std::setw(setw + perc + 1) << ele_[i] << ", ";
 		}
 	}
 }

@@ -2,9 +2,10 @@
 #define MATRIX_H
 
 #include <math.h>
-#include <map>
 #include <vector>
 #include <type_traits>
+#include <algorithm>
+#include <iomanip>      
 
 template<class type>
 class Matrix {
@@ -102,7 +103,7 @@ public:
 	void operator/=(const type val);
 	void operator&=(const Matrix<type> &m);
 
-	
+
 	Matrix<type>* operator&(const Matrix<type> &m);
 
 
