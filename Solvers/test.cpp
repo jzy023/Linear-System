@@ -25,12 +25,18 @@ int main()
 	// std::cout << "-----------\n";
 
 	linearSystem<double> mySys(myMat1, myMat2, 20);
-	Matrix<double> solution = mySys.Jacobi();
+
+
+	Matrix<double> solution1 = mySys.GaussSeidel();
+	std::cout << "-----------\n";
+	solution1.Show();
 	std::cout << "-----------\n";
 
-	solution.Show();
-	std::cout << "-----------\n";
 
+	Matrix<double> solution2 = mySys.SOR(0.5);
+	std::cout << "-----------\n";
+	solution2.Show();
+	std::cout << "-----------\n";
 
 	return 0;
 }

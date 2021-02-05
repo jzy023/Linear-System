@@ -102,6 +102,7 @@ public:
 	void operator/=(const type val);
 	void operator&=(const Matrix<type> &m);
 
+	
 	Matrix<type>* operator&(const Matrix<type> &m);
 
 

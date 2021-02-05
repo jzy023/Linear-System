@@ -25,6 +25,6 @@ public:
 
 	Matrix<type> Jacobi();
 	Matrix<type> GaussSeidel();
-	Matrix<type> SOR();
+	Matrix<type> SOR(float rf);
 
 };

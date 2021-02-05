@@ -82,7 +82,7 @@ Matrix<type> linearSystem<type>::Jacobi()
 {
 	Matrix<type> xPrev = xIni_;
 	Matrix<type> x(b_.size(0),b_.size(1));
-	Matrix<type> solu; // <-- NEED IMPROVEMENT!!!
+	Matrix<type> resTemp; // <-- NEED IMPROVEMENT!!!
 	int iter = 0;
 	double err = 1.0;
 	while (iter < maxIter_ && err > tol_)
@@ -101,14 +101,78 @@ Matrix<type> linearSystem<type>::Jacobi()
 			x(i,0) = (b_(i,0) - sum)/A_(i,i);
 		}
 		xPrev = x;
-		solu = *(A_ & x);
-		solu -= b_;
-		err = solu.Norm();
+		resTemp = *(A_ & x);
+		resTemp -= b_;
+		err = resTemp.Norm();
 		iter++;
-
-		std::cout << "number of iteration: " << iter 
-				  << ", local residual: " << err << "\n";
 	}
+	std::cout << "number of iteration: " << iter 
+				  << ", local residual: " << err << "\n";
+	return x;
+}
 
+
+template<class type>
+Matrix<type> linearSystem<type>::GaussSeidel()
+{
+	Matrix<type> x = xIni_;
+	Matrix<type> resTemp;
+	int iter = 0;
+	double err = 1.0;
+	while (iter < maxIter_ && err > tol_)
+	{
+		for (int i = 0; i < A_.size(0); i++)
+		{
+			type sum = 0;
+			for (int j = 1; j < b_.size(0); j++)
+			{
+				if (i == j)
+				{
+					continue;
+				}
+				sum += A_(i,j)*x(j,0); // <-- NEED IMPROVEMENT!!!
+			}
+			x(i,0) = (b_(i,0) - sum)/A_(i,i);
+		}
+		resTemp = *(A_ & x);
+		resTemp -= b_;
+		err = resTemp.Norm();
+		iter++;
+	}
+	std::cout << "number of iteration: " << iter 
+				  << ", local residual: " << err << "\n";
+	return x;
+}
+
+
+template<class type>
+Matrix<type> linearSystem<type>::SOR(float rf)
+{
+	Matrix<type> x = xIni_;
+	Matrix<type> resTemp;
+	int iter = 0;
+	double err = 1.0;
+	while (iter < maxIter_ && err > tol_)
+	{
+		for (int i = 0; i < A_.size(0); i++)
+		{
+			type sum = 0;
+			for (int j = 1; j < b_.size(0); j++)
+			{
+				if (i == j)
+				{
+					continue;
+				}
+				sum += A_(i,j)*x(j,0); // <-- NEED IMPROVEMENT!!!
+			} // rf is the relaxation factor
+			x(i,0) = (1 - rf)*x(i,0) + rf*(b_(i,0) - sum)/A_(i,i);
+		}
+		resTemp = *(A_ & x);
+		resTemp -= b_;
+		err = resTemp.Norm();
+		iter++;
+	}
+	std::cout << "number of iteration: " << iter 
+				  << ", local residual: " << err << "\n";
 	return x;
 }
