@@ -23,8 +23,8 @@ public:
 	linearSystem(Matrix<type> &A, Matrix<type> &b, double tol);
 	linearSystem(Matrix<type> &A, Matrix<type> &b, int maxIter, double tol);
 
-	Matrix<type> Jacobi(); // <-- modify to return by reference??
-	Matrix<type> GaussSeidel();
+	Matrix<type> Jcb(); // Jacobi method <-- modify to return by reference??
+	Matrix<type> GS();	// GaussSeidel method
 	Matrix<type> SOR(float rf);
 
 };

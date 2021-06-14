@@ -78,7 +78,7 @@ tol_(tol)
 
 // PUBLIC METHODS -------------------------------------------------------------
 template<class type>
-Matrix<type> linearSystem<type>::Jacobi()
+Matrix<type> linearSystem<type>::Jcb()
 {
 	Matrix<type> xPrev = xIni_;
 	Matrix<type> x(b_.size(0),b_.size(1));
@@ -113,7 +113,7 @@ Matrix<type> linearSystem<type>::Jacobi()
 
 
 template<class type>
-Matrix<type> linearSystem<type>::GaussSeidel()
+Matrix<type> linearSystem<type>::GS()
 {
 	Matrix<type> x = xIni_;
 	Matrix<type> resTemp;

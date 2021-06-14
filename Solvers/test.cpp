@@ -27,7 +27,7 @@ int main()
 	linearSystem<double> mySys(myMat1, myMat2, 20);
 
 
-	Matrix<double> solution1 = mySys.GaussSeidel();
+	Matrix<double> solution1 = mySys.GS();
 	std::cout << "-----------\n";
 	solution1.Show();
 	std::cout << "-----------\n";
