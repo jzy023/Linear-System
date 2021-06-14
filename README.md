@@ -8,12 +8,12 @@ This repo consists of source code of some basic linear system operations, for ex
 class names:
 
 - Matrix
-
 - squareMatrix
-
 - sparseMatrix
 
 
 ## Solvers
 
-- Jacobi
+- Jacobi solver
+- Gauss-Seidel solver
+- SOR solver
