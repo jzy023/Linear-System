@@ -7,7 +7,8 @@
 #include "SparseMatrix.C"
 
 int main(int argc, char **argv)
-{	
+{
+
 	// initiaization
 	std::vector<double> M1{1,0,0,0,
 					       1,1,0,0,
@@ -16,9 +17,9 @@ int main(int argc, char **argv)
 	squareMatrix<double> myMat1(4,M1);
 
 	std::vector<std::vector<double>> M2{{2,2,1,2},
-									 {1,4,7,3},
-									 {1,1,2,1},
-									 {4,1,2,5}};
+										{1,4,7,3},
+										{1,1,2,1},
+										{4,1,2,5}};
 	squareMatrix<double> myMat2(M2);
 
 	std::vector<double> row1{1};
