@@ -83,6 +83,7 @@ public:
 	// compute transpose
 	virtual Matrix<type> *T();
 
+
 	// return sparse version of squareMatrix
 	inline std::vector<std::vector<type>> Sparse();
 

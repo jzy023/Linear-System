@@ -217,6 +217,11 @@ type Matrix<type>::Norm()
 };
 
 
+
+// Dot product -> Inner product, Cross product -> Outter product 
+
+
+
 // OPERATORS ------------------------------------------------------------------
 template<class type>
 type& Matrix<type>::operator()(const long unsigned int i, 

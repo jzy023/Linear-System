@@ -41,7 +41,7 @@ public:
 
 	// compute transpose
 	squareMatrix<type> *T() override;
- 
+
 	// LU decomposition
 	std::vector<squareMatrix<type>> *LU();
 	std::vector<squareMatrix<type>> *LU1();

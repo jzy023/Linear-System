@@ -1,11 +1,12 @@
 #include <iostream>
-
+#include <cstdlib>
+#include <unistd.h>
 // tested functionalities
 #include "Matrix.C"
 #include "SquareMatrix.C"
 #include "SparseMatrix.C"
 
-int main(int argc, char const *argv[])
+int main(int argc, char **argv)
 {	
 	// initiaization
 	std::vector<double> M1{1,0,0,0,
@@ -50,7 +51,6 @@ int main(int argc, char const *argv[])
 	std::vector<std::vector<double>> sparseBuild = myMatTran.Sparse();
 	sparseMatrix<double> mySpar(sparseSize,sparseBuild);
 	mySpar.Show();
-
 
 	return 0;
 }
