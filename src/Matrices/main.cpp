@@ -47,9 +47,9 @@ int main(int argc, char **argv)
 
 	std::cout << "-----------\n";
 	std::vector<long unsigned> sparseSize = myMatTran.size();
-	std::vector<std::vector<double>> sparseBuild = myMatTran.sparse();
-	sparseMatrix<double> mySpar(sparseSize,sparseBuild);
-	mySpar.Show();
+    sparseMatrix<double> mySpar = myMatTran.sparse();
+    std::cout << std::get<0>(mySpar.elements()[5]) << std::endl;
+	// mySpar.Show();
 
 	return 0;
 }

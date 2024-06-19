@@ -178,33 +178,6 @@ Matrix<type> *Matrix<type>::T()
 }
 
 
-template<class type>
-std::vector<std::vector<type>> Matrix<type>::sparse()
-{
-	int len = 0;
-	for (int i : matrix_)
-	{
-		if (i != 0)
-		{
-			len++;
-		}
-	}
-	std::vector<type> ele(len);
-	std::vector<type> idx(len);
-	int n = 0;
-	for (long unsigned i = 0; i < (rows_*cols_); i++)
-	{
-		if (matrix_[i] != 0)
-		{
-			ele[n] = matrix_[i];
-			idx[n] = i;
-			n++;
-		}
-	}
-	return std::vector<std::vector<type>> {idx,ele};
-}
-
-
 template<class type> // <-- NEED IMPROVEMENT!!
 type Matrix<type>::Norm()
 {
@@ -215,6 +188,62 @@ type Matrix<type>::Norm()
 	}
 	return std::sqrt(ans);
 };
+
+
+template<class type>
+std::vector<std::tuple<long unsigned, long unsigned, type>> Matrix<type>::sparseElements()
+{
+	int len = 0;
+	for (int i : matrix_)
+	{
+		if (i != 0)
+		{
+			len++;
+		}
+	}
+    std::vector<std::tuple<long unsigned, long unsigned, type>> elements;
+    elements.reserve(len);
+	for (long unsigned i = 0; i < (rows_*cols_); i++)
+	{
+		if (matrix_[i] != 0)
+		{
+            int row = i / cols_;
+            int col = i % cols_;
+            type value = matrix_[i];
+            elements.emplace_back(row, col, value);
+		}
+	}
+	return elements;
+}
+
+
+template<class type>
+sparseMatrix<type> Matrix<type>::sparse()
+{
+	int len = 0;
+	for (int i : matrix_)
+	{
+		if (i != 0)
+		{
+			len++;
+		}
+	}
+    std::vector<std::tuple<long unsigned, long unsigned, type>> elements;
+    elements.reserve(len);
+	for (long unsigned i = 0; i < (rows_*cols_); i++)
+	{
+		if (matrix_[i] != 0)
+		{
+            int row = i / cols_;
+            int col = i % cols_;
+            type value = matrix_[i];
+            elements.emplace_back(row, col, value);
+		}
+	}
+
+    sparseMatrix ans(rows_, cols_ , elements);
+	return ans;
+}
 
 
 

@@ -50,7 +50,7 @@ OBJ = $(SRC:.cpp=.o)
 #=============== CPU Code Compilation ===============
 all:$(EXECS_DIRECTORY)/$(EXECNAME)
 	# rm -rf ThirdParty/*.o;
-	# rm -rf *.o;
+	rm -rf *.o;
 ifeq ($(USE_DEBUG), NO)
 	@echo "  --- Compiled Release CPU version ---"
 else

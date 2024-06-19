@@ -2,6 +2,7 @@
 #define MATRIX_H
 
 #include "includes.hpp"
+#include "SparseMatrix.hpp"
 
 template<class type>
 class Matrix {
@@ -79,9 +80,10 @@ public:
 	// compute transpose
 	virtual Matrix<type> *T();
 
-
+    // returb non zero elements and the index
+	std::vector<std::tuple<long unsigned, long unsigned, type>> sparseElements();
 	// return sparse version of squareMatrix
-	std::vector<std::vector<type>> sparse();
+    sparseMatrix<type> sparse();
 
 	// return Norm <-- NEED IMPROVEMENT!!
 	type Norm();
