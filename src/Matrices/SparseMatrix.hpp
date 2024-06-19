@@ -1,11 +1,7 @@
 #ifndef SparseMATRIX_H
 #define SparseMATRIX_H
 
-#include <math.h>
-#include <vector>
-#include <type_traits>
-#include <algorithm>
-#include <iomanip>
+#include "includes.hpp"
 
 template<class type>
 class sparseMatrix
@@ -13,10 +9,11 @@ class sparseMatrix
 	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
 
 private:
-	long unsigned int rows_;
-	long unsigned int cols_;
-	std::vector<type> ele_;
+	long unsigned rows_;
+	long unsigned cols_;
+    std::vector<std::tuple<int, int, double>> elements_; // (row, column, value) of non-zero elements
 	std::vector<type> idx_;
+    std::vector<type> ele_;
 
 	static void checkMat(const sparseMatrix<type> &m);
 
@@ -43,21 +40,21 @@ private:
 public:
 	// constructors & destructor
 	sparseMatrix(){};
-	sparseMatrix(std::vector<long unsigned int> size);
-	sparseMatrix(std::vector<long unsigned int> size, std::vector<std::vector<type>> &m);
-	sparseMatrix(long unsigned int rows, long unsigned int cols);
-	sparseMatrix(long unsigned int rows, long unsigned int cols, std::vector<std::vector<type>> &m);
+	sparseMatrix(std::vector<long unsigned> size);
+	sparseMatrix(std::vector<long unsigned> size, std::vector<std::vector<type>> &m);
+	sparseMatrix(long unsigned rows, long unsigned cols);
+	sparseMatrix(long unsigned rows, long unsigned cols, std::vector<std::vector<type>> &m);
 	~sparseMatrix() = default;
 
 	// getter functions
 	/* int func() const -->  cannot call any non-const member functions,
 	   nor can it change any member variables.*/
-	inline std::vector<long unsigned int> size() const { return {rows_,cols_}; }
+	inline std::vector<long unsigned> size() const { return {rows_,cols_}; }
 	inline std::vector<type>& Idx() { return idx_; }
 	inline std::vector<type>& Ele() { return ele_; }
-	// inline std::vector<type> Row(long unsigned int i) const;
-	// inline std::vector<type> Col(long unsigned int i) const;
-	inline void Show() const;
+	// inline std::vector<type> Row(long unsigned i) const;
+	// inline std::vector<type> Col(long unsigned i) const;
+	void Show() const;
 
 
 };

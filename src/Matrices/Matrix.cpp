@@ -1,4 +1,4 @@
-#include "Matrix.H"
+#include "Matrix.hpp"
 
 // PRIVATE METHODS ------------------------------------------------------------
 template<class type>
@@ -27,7 +27,7 @@ void Matrix<type>::checkMat(const Matrix<type> &m)
 }
 
 template<class type>
-std::vector<type> Matrix<type>::chunk(std::vector<int> &v1, std::vector<int> &v2)
+std::vector<type> Matrix<type>::chunk(std::vector<long unsigned> &v1, std::vector<long unsigned> &v2)
 {
 	if (v1.size() != 2 || v2.size() != 2 ||
 		v1[0] >= v2[0] || v1[1] >= v2[1] )
@@ -44,9 +44,9 @@ std::vector<type> Matrix<type>::chunk(std::vector<int> &v1, std::vector<int> &v2
 	int newRows = v2[0] - v1[0] + 1;
 	int newCols = v2[1] - v1[1] + 1;
 	std::vector<type> v(newRows*newCols);
-	for (int i = v1[0]; i < v2[0]+1; i++)
+	for (long unsigned i = v1[0]; i < v2[0]+1; i++)
 	{
-		for (int j = v1[1]; j < v2[1]+1; j++)
+		for (long unsigned j = v1[1]; j < v2[1]+1; j++)
 		{
 			v[i*newCols+j] = matrix_[i*cols_+j];
 		}
@@ -62,9 +62,9 @@ Matrix<type>::Matrix(std::vector<std::vector<type>> &m)
 	rows_ = m.size();
 	cols_ = m[0].size();
 	matrix_ = std::vector<type>(rows_*cols_);
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] = m[i][j];
 		}
@@ -73,7 +73,7 @@ Matrix<type>::Matrix(std::vector<std::vector<type>> &m)
 }
 
 template<class type>
-Matrix<type>::Matrix(long unsigned int rows, long unsigned int cols)
+Matrix<type>::Matrix(long unsigned rows, long unsigned cols)
 :
 rows_(rows),
 cols_(cols),
@@ -83,7 +83,7 @@ matrix_(std::vector<type>(rows*cols))
 }
 
 template<class type>
-Matrix<type>::Matrix(long unsigned int rows, long unsigned int cols, 
+Matrix<type>::Matrix(long unsigned rows, long unsigned cols, 
 					 std::vector<type> &m)
 :
 rows_(rows),
@@ -94,16 +94,16 @@ matrix_(m)
 }
 
 template<class type>
-Matrix<type>::Matrix(long unsigned int rows, long unsigned int cols, 
+Matrix<type>::Matrix(long unsigned rows, long unsigned cols, 
 					 std::vector<std::vector<type>> &m)
 :
 rows_(rows),
 cols_(cols)
 {
 	matrix_ = std::vector<type>(rows_*cols_);
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] = m[i][j];
 		}
@@ -114,10 +114,10 @@ cols_(cols)
 
 // PUBLIC METHODS -------------------------------------------------------------
 template<class type>
-std::vector<type> Matrix<type>::Row( long unsigned int i ) const 
+std::vector<type> Matrix<type>::Row( long unsigned i ) const 
 {
 	std::vector<type> row(cols_);
-	for (int j = 0; j < cols_; j++)
+	for (long unsigned j = 0; j < cols_; j++)
 	{
 		row[j] = matrix_[i*cols_ + j]; 
 	}
@@ -125,10 +125,10 @@ std::vector<type> Matrix<type>::Row( long unsigned int i ) const
 }
 
 template<class type>
-std::vector<type> Matrix<type>::Col( long unsigned int j ) const 
+std::vector<type> Matrix<type>::Col( long unsigned j ) const 
 {
 	std::vector<type> col(rows_);
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
 		col[i] = matrix_[i*cols_ + j];
 	}
@@ -147,8 +147,8 @@ void Matrix<type>::Show() const
 	}
 	std::cout << std::fixed << std::setprecision(perc) << std::setfill(' ');
 	std::cout << "returned matrix:\n";
-	for (int i = 0; i < rows_; i++){
-		for (int j = 0; j < cols_; j++){
+	for (long unsigned i = 0; i < rows_; i++){
+		for (long unsigned j = 0; j < cols_; j++){
 			if (j == 0 && cols_ != 1)
 				std::cout << "|" << std::setw(setw + perc + 1) << matrix_[i*cols_+j] << ", ";
 			else if (j == 0 && cols_ == 1)
@@ -167,9 +167,9 @@ template<class type>
 Matrix<type> *Matrix<type>::T()
 {
 	std::vector<type> v(cols_*rows_);
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			v[j*rows_+i] = matrix_[i*cols_+j];
 		}
@@ -179,7 +179,7 @@ Matrix<type> *Matrix<type>::T()
 
 
 template<class type>
-std::vector<std::vector<type>> Matrix<type>::Sparse()
+std::vector<std::vector<type>> Matrix<type>::sparse()
 {
 	int len = 0;
 	for (int i : matrix_)
@@ -192,7 +192,7 @@ std::vector<std::vector<type>> Matrix<type>::Sparse()
 	std::vector<type> ele(len);
 	std::vector<type> idx(len);
 	int n = 0;
-	for (int i = 0; i < (rows_*cols_); i++)
+	for (long unsigned i = 0; i < (rows_*cols_); i++)
 	{
 		if (matrix_[i] != 0)
 		{
@@ -224,8 +224,8 @@ type Matrix<type>::Norm()
 
 // OPERATORS ------------------------------------------------------------------
 template<class type>
-type& Matrix<type>::operator()(const long unsigned int i, 
-							  const long unsigned int j)
+type& Matrix<type>::operator()(const long unsigned i, 
+							  const long unsigned j)
 {
 	return matrix_[i*cols_+j]; 
 }
@@ -246,9 +246,9 @@ void Matrix<type>::operator+=(const Matrix<type> &m)
 	{
 		throw std::domain_error("matrices have different dimensions");
 	}
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] += m.matrix_[i*cols_+j];
 		}
@@ -257,9 +257,9 @@ void Matrix<type>::operator+=(const Matrix<type> &m)
 template<class type>
 void Matrix<type>::operator+=(const type val)
 {
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] += val;
 		}
@@ -273,9 +273,9 @@ void Matrix<type>::operator-=(const Matrix<type> &m)
 	{
 		throw std::domain_error("matrices have different dimensions");
 	}
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] -= m.matrix_[i*cols_+j];
 		}
@@ -284,9 +284,9 @@ void Matrix<type>::operator-=(const Matrix<type> &m)
 template<class type>
 void Matrix<type>::operator-=(const type val)
 {
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] -= val;
 		}
@@ -301,9 +301,9 @@ void Matrix<type>::operator*=(const Matrix<type> &m)
 	{
 		throw std::domain_error("matrices have different dimensions");
 	}
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] *= m.matrix_[i*cols_+j];
 		}
@@ -312,9 +312,9 @@ void Matrix<type>::operator*=(const Matrix<type> &m)
 template<class type>
 void Matrix<type>::operator*=(const type val)
 {
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] *= val;
 		}
@@ -328,9 +328,9 @@ void Matrix<type>::operator/=(const Matrix<type> &m)
 	{
 		throw std::domain_error("matrices have different dimensions");
 	}
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] /= m.matrix_[i*cols_+j];
 		}
@@ -339,9 +339,9 @@ void Matrix<type>::operator/=(const Matrix<type> &m)
 template<class type>
 void Matrix<type>::operator/=(const type val)
 {
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
-		for (int j = 0; j < cols_; j++)
+		for (long unsigned j = 0; j < cols_; j++)
 		{
 			matrix_[i*cols_+j] /= val;
 		}
@@ -356,10 +356,10 @@ void Matrix<type>::operator&=(const Matrix<type> &m)
 		throw std::domain_error("illegal dimensions");
 	}
 	std::vector<type> tempM(rows_*m.cols_);
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
 		std::vector<type> row = Matrix<type>::Row(i);
-		for (int j = 0; j < m.cols_; j++)
+		for (long unsigned j = 0; j < m.cols_; j++)
 		{
 			std::vector<type> col = m.Col(j);
 			tempM[i*m.cols_+j] = Matrix<type>::inner(row, col);
@@ -379,16 +379,19 @@ Matrix<type>* Matrix<type>::operator&(const Matrix<type> &m)
 		throw std::domain_error("illegal dimensions");
 	}
 	std::vector<type> tempM(rows_*m.cols_);
-	for (int i = 0; i < rows_; i++)
+	for (long unsigned i = 0; i < rows_; i++)
 	{
 		std::vector<type> row = Matrix<type>::Row(i);
-		for (int j = 0; j < m.cols_; j++)
+		for (long unsigned j = 0; j < m.cols_; j++)
 		{
 			std::vector<type> col = m.Col(j);
 			tempM[i*m.cols_+j] = Matrix<type>::inner(row, col);
 		}
 	}
-	long unsigned int rows = tempM.size()/m.cols_;
-	long unsigned int cols = m.cols_;
+	long unsigned rows = tempM.size()/m.cols_;
+	long unsigned cols = m.cols_;
 	return new Matrix<type>(rows,cols,tempM);
 }
+
+
+template class Matrix<double>;

@@ -1,10 +1,8 @@
-#include <iostream>
-#include <cstdlib>
-#include <unistd.h>
+
 // tested functionalities
-#include "Matrix.C"
-#include "SquareMatrix.C"
-#include "SparseMatrix.C"
+#include "Matrix.hpp"
+#include "SquareMatrix.hpp"
+#include "SparseMatrix.hpp"
 
 int main(int argc, char **argv)
 {
@@ -35,21 +33,21 @@ int main(int argc, char **argv)
 	std::cout << "trace of M is " << myMat1.Trace() << "\n";
 	std::cout << "determinant of M is " << myMat1.Det() << "\n";
 
-	std::cout << "-----------\n";
+	std::cout << "-----------\nM1.T()\n";
 	Matrix<double> myMatTran(*myMat1.T());
 	myMatTran.Show();
 
-	std::cout << "-----------\n";
+	std::cout << "-----------\nM1 inner M3\n";
 	myMat1 &= myMat3;
 	myMat1.Show();
 
-	std::cout << "-----------\n";
+	std::cout << "-----------\nM2.LU()->L\n";
 	squareMatrix<double> myMatL((*myMat2.LU())[1]);
 	myMatL.Show();
 
 	std::cout << "-----------\n";
-	std::vector<long unsigned int> sparseSize = myMatTran.size();
-	std::vector<std::vector<double>> sparseBuild = myMatTran.Sparse();
+	std::vector<long unsigned> sparseSize = myMatTran.size();
+	std::vector<std::vector<double>> sparseBuild = myMatTran.sparse();
 	sparseMatrix<double> mySpar(sparseSize,sparseBuild);
 	mySpar.Show();
 

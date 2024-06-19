@@ -1,4 +1,4 @@
-#include "SparseMatrix.H"
+#include "SparseMatrix.hpp"
 
 // PRIVATE METHODS ------------------------------------------------------------
 template<class type>
@@ -34,7 +34,7 @@ void sparseMatrix<type>::checkMat(const sparseMatrix<type> &m)
 
 // CONSTRUCTORS ---------------------------------------------------------------
 template<class type>
-sparseMatrix<type>::sparseMatrix(std::vector<long unsigned int> size)
+sparseMatrix<type>::sparseMatrix(std::vector<long unsigned> size)
 :
 rows_(size[0]),
 cols_(size[1])
@@ -43,7 +43,7 @@ cols_(size[1])
 }
 
 template<class type>
-sparseMatrix<type>::sparseMatrix(std::vector<long unsigned int> size,
+sparseMatrix<type>::sparseMatrix(std::vector<long unsigned> size,
 								 std::vector<std::vector<type>> &m)
 :
 rows_(size[0]),
@@ -55,7 +55,7 @@ ele_(m[1])
 }
 
 template<class type>
-sparseMatrix<type>::sparseMatrix(long unsigned int rows, long unsigned int cols)
+sparseMatrix<type>::sparseMatrix(long unsigned rows, long unsigned cols)
 :
 rows_(rows),
 cols_(cols)
@@ -64,8 +64,8 @@ cols_(cols)
 }
 
 template<class type>
-sparseMatrix<type>::sparseMatrix(long unsigned int rows, 
-								 long unsigned int cols,
+sparseMatrix<type>::sparseMatrix(long unsigned rows, 
+								 long unsigned cols,
 								 std::vector<std::vector<type>> &m)
 :
 rows_(rows),
@@ -89,7 +89,7 @@ void sparseMatrix<type>::Show() const
 	}
 	std::cout << std::fixed << std::setprecision(perc) << std::setfill(' ');
 	std::cout << "returned matrix:\n";
-	for (int i = 0; i < idx_.size(); i++){
+	for (long unsigned i = 0; i < idx_.size(); i++){
 		if (idx_.size() > 5){
 			if (i > 2 && i < idx_.size() - 2)
 				continue;
@@ -111,7 +111,7 @@ void sparseMatrix<type>::Show() const
 				std::cout << std::setw(setw + perc + 1) << idx_[i] << ", ";
 		}
 	}
-	for (int i = 0; i < idx_.size(); i++){
+	for (long unsigned i = 0; i < idx_.size(); i++){
 		if (idx_.size() > 5){
 			if (i > 2 && i < idx_.size() - 2)
 				continue;
@@ -135,3 +135,5 @@ void sparseMatrix<type>::Show() const
 	}
 }
 
+
+template class sparseMatrix<double>;

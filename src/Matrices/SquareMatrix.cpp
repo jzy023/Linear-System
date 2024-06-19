@@ -1,4 +1,4 @@
-#include "SquareMatrix.H"
+#include "SquareMatrix.hpp"
 
 // PRIVATE METHODS ------------------------------------------------------------
 template<class type>
@@ -28,7 +28,7 @@ Matrix<type>::Matrix(m)
 };
 
 template<class type>
-squareMatrix<type>::squareMatrix(long unsigned int n) 
+squareMatrix<type>::squareMatrix(long unsigned n) 
 :
 Matrix<type>::Matrix(n,n)
 {
@@ -36,7 +36,7 @@ Matrix<type>::Matrix(n,n)
 };
 
 template<class type>
-squareMatrix<type>::squareMatrix(long unsigned int n, 
+squareMatrix<type>::squareMatrix(long unsigned n, 
 								 std::vector<type> &m) 
 :
 Matrix<type>::Matrix(n,n,m)
@@ -45,7 +45,7 @@ Matrix<type>::Matrix(n,n,m)
 };
 
 template<class type>
-squareMatrix<type>::squareMatrix(long unsigned int n, 
+squareMatrix<type>::squareMatrix(long unsigned n, 
 								 std::vector<std::vector<type>> &m) 
 :
 Matrix<type>::Matrix(n,n,m)
@@ -59,7 +59,7 @@ template<class type>
 std::vector<type> squareMatrix<type>::Diag()
 {
 	std::vector<type> ans(this->rows_,0);
-	for (int i = 0; i < this->rows_; i++)
+	for (long unsigned i = 0; i < this->rows_; i++)
 	{
 		ans[i] = this->matrix_[i*this->cols_+i];
 	}
@@ -71,7 +71,7 @@ template<class type>
 type squareMatrix<type>::Trace()
 {
 	type ans = 0.0;
-	for (int i = 0; i < this->rows_; i++){
+	for (long unsigned i = 0; i < this->rows_; i++){
 		ans += this->matrix_[i*this->cols_+i];
 	}
 	return ans;
@@ -96,10 +96,10 @@ type squareMatrix<type>::DetCore(std::vector<type> M, int n){
 	{
 		for (int x = 0; x < n; x++)
 		{
-			int subi = 0;
+			long unsigned subi = 0;
 			for (int i = 1; i < n; i++)
 			{
-				int subj = 0;
+				long unsigned subj = 0;
 				for (int j = 0; j < n; j++)
 				{
 					if (x == j)
@@ -131,9 +131,9 @@ type squareMatrix<type>::Det(){
 template<class type>
 squareMatrix<type> *squareMatrix<type>::T(){
 	std::vector<type> v(this->cols_*this->rows_);
-	for (int i = 0; i < this->rows_; i++)
+	for (long unsigned i = 0; i < this->rows_; i++)
 	{
-		for (int j = 0; j < this->cols_; j++)
+		for (long unsigned j = 0; j < this->cols_; j++)
 		{
 			v[j*this->rows_+i] = this->matrix_[i*this->cols_+j];
 		}
@@ -146,16 +146,16 @@ template<class type>
 std::vector<squareMatrix<type>> *squareMatrix<type>::LU(){
 	// Doolittle Algorithm
 	// credit: geeksforgeeks.org/doolittle-algorithm-lu-decomposition
-	int n = this->rows_;
+	long unsigned n = this->rows_;
 	std::vector<type> LMat(pow(n,2),0);
 	std::vector<type> UMat(pow(n,2),0);
-	for (int i = 0; i < n; i++)
+	for (long unsigned i = 0; i < n; i++)
 	{
-		for (int k = i; k < n; k++)
+		for (long unsigned k = i; k < n; k++)
 		{
-			int sumU = 0;
-			int sumL = 0;
-			for (int j = 0; j < i; j++)
+			long unsigned sumU = 0;
+			long unsigned sumL = 0;
+			for (long unsigned j = 0; j < i; j++)
 			{
 				sumU += (LMat[i*n+j]*UMat[j*n+k]);
 				sumL += LMat[k*n+j]*UMat[j*n+i];
@@ -176,6 +176,9 @@ std::vector<squareMatrix<type>> *squareMatrix<type>::LU(){
 
 // 	return ans; 
 // }
+
+
+template class squareMatrix<double>;
 
 
 

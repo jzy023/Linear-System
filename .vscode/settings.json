@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "bashrc": "shellscript",
+        "SparseMatrix.C": "cpp",
+        "Matrix.C": "cpp",
+        "LinearSystem.C": "cpp"
+    }
+}

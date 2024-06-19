@@ -1,14 +1,11 @@
 #ifndef SquareMATRIX_H
 #define SquareMATRIX_H
 
-#include <math.h>
-#include <vector>
-#include <type_traits>
-
-#include "Matrix.H"
+#include "Matrix.hpp"
 
 template<class type>
-class squareMatrix : public Matrix<type>
+class squareMatrix 
+: public Matrix<type>
 {
 	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
 
@@ -21,19 +18,19 @@ public:
 	// constructors & destructor
 	squareMatrix(){};
 	squareMatrix(std::vector<std::vector<type>> &m);
-	squareMatrix(long unsigned int n);
-	squareMatrix(long unsigned int n, std::vector<type> &m);
-	squareMatrix(long unsigned int n, std::vector<std::vector<type>> &m);
+	squareMatrix(long unsigned n);
+	squareMatrix(long unsigned n, std::vector<type> &m);
+	squareMatrix(long unsigned n, std::vector<std::vector<type>> &m);
 	~squareMatrix() = default;
 
 	// resize matrix_ without ultering elements
 	void Resize();
 
 	// return diagonal elemtents
-	inline std::vector<type> Diag();
+	std::vector<type> Diag();
 
 	// return trace of M
-	inline type Trace();
+	type Trace();
 
 	// calculate determinant of M 
 	type Det(); // mast function
