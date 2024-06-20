@@ -48,8 +48,8 @@ int main(int argc, char **argv)
 	std::cout << "-----------\n";
 	std::vector<long unsigned> sparseSize = myMatTran.size();
     sparseMatrix<double> mySpar = myMatTran.sparse();
-    std::cout << std::get<0>(mySpar.elements()[5]) << std::endl;
-	// mySpar.Show();
+    mySpar.resize(20,20);
+	mySpar.Show();
 
 	return 0;
 }

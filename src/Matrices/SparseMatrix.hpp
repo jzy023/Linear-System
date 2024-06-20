@@ -8,33 +8,35 @@ class sparseMatrix
 {
 	static_assert(std::is_arithmetic<type>::value, "Type must be numeric");
 
-private:
-	long unsigned rows_;
-	long unsigned cols_;
-    // (row, column, value) of non-zero elements
-    std::vector<std::tuple<long unsigned, long unsigned, type>> eles_; 
+    // A hash function for a pair of integers
+    struct pair_hash {
+        template <class T1, class T2>
+        std::size_t operator() (const std::pair<T1, T2>& pair) const {
+            return std::hash<T1>()(pair.first) ^ std::hash<T2>()(pair.second);
+        }
+    };
 
-	static void checkMat(const sparseMatrix<type> &m);
+private:
+
+    // Memebers
+	long unsigned rows_;
+
+	long unsigned cols_;
+
+    mutable unsigned maxRowNoneZeros_; // max num of row for non zero items
+
+    mutable unsigned maxColNoneZeros_; // max num of col for non zero items
+
+    // Map to store non-zero elements with their positions
+    std::unordered_map<std::pair<long unsigned, long unsigned>, type, pair_hash> eleMap_;
+
+
+    // Methods
+    void mapEles(std::vector<std::tuple<long unsigned, long unsigned, type>> &m);
 
 	void clear();
-
-	// type inner(std::vector<type> &v1, std::vector<type> &v2){
-	// 	type ans = 0;
-	// 	for (int i = 0; i < v1.size(); i++){
-	// 		ans += v1[i]*v2[i];
-	// 	}
-	// 	return ans;
-	// };
-
-	// std::vector<type> outer(std::vector<type> &v1, std::vector<type> &v2){
-	// 	std::vector<type> ans(v1.size()*v2.size());
-	// 	for (int i = 0; i < v1.size(); i++){
-	// 		for (int j = 0; j < v2.size(); j++){
-	// 			ans(i*v2.size()+j) = v1[i]*v2[j];
-	// 		}
-	// 	}
-	// 	return ans;
-	// };
+	
+    static void checkMat(const sparseMatrix<type> &m);
 
 public:
 	// CONSTRUCTORS 
@@ -55,27 +57,22 @@ public:
     // MOVE AND COPY CONSTRUCTORS
     sparseMatrix(sparseMatrix&&) noexcept {};
 
-
     // DESTRUCTOR
 	~sparseMatrix() = default;
 
-	// getter functions
-	/* int func() const -->  cannot call any non-const member functions,
-	   nor can it change any member variables.*/
-	inline std::vector<long unsigned> size() const
-    { 
-        return {rows_,cols_};
-    }
+	// GETTER functions
+	inline std::vector<long unsigned> size() const;
 
-    inline std::vector<std::tuple<long unsigned, long unsigned, type>> elements() const 
-    {
-        return eles_;
-    }
+    inline std::vector<std::tuple<long unsigned, long unsigned, type>> getElements() const;
+
+    inline type getItem(long unsigned row, long unsigned col) const;
+
+    // SETTER functions
+    void resize(long unsigned newRow, long unsigned newCol);
 
 	// inline std::vector<type> Row(long unsigned i) const;
 	// inline std::vector<type> Col(long unsigned i) const;
 	void Show() const;
-
 
 };
 

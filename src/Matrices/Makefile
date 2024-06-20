@@ -6,8 +6,10 @@ USE_DEBUG=YES
 # USE_DEBUG=NO
 
 #==================== Included Libraries ====================
-LIBS_DIRECTORIES:=$(LIBS_DIRECTORIES) -L/usr/lib/gcc/x86_64-linux-gnu/9
-JLIBS=${LIBS_DIRECTORIES}
+# LIBS_DIRECTORIES:=$(LIBS_DIRECTORIES) -L/usr/lib/gcc/x86_64-linux-gnu/9 
+# JLIBS=${LIBS_DIRECTORIES}
+LIBS_DIRECTORIES:=$(LIBS_DIRECTORIES) -L/usr/lib/gcc/x86_64-linux-gnu/9 -L/usr/local/lib
+JLIBS=${LIBS_DIRECTORIES} -lsfml-graphics -lsfml-window -lsfml-system
 
 #======================= Other Setups =======================
 ifeq ($(USE_DEBUG), YES)
@@ -20,10 +22,10 @@ endif
 
 
 #==================== Included Libraries ====================
+CCFLAGS= -c -std=c++2a -fopenmp 
 ifeq ($(USE_DEBUG), YES)
-	CCFLAGS=-c -std=c++2a -g -Wall -fopenmp -O3
+	CCFLAGS+=-g -Wall -O3
 else
-	CCFLAGS=-c -std=c++2a -fopenmp 
 	ifeq ($(USE_FAST_MATH), YES)
 		CCFLAGS+= -ffast-math
 	endif
@@ -32,7 +34,7 @@ else
 	endif
 endif
 CC=g++
-CCLINKFLAGS=-fopenmp -lgomp
+CCLINKFLAGS=-fopenmp -lgomp $(JLIBS)
 
 #Required for GCC versions >=5.0
 ifeq ($(USE_GCC5), YES)
